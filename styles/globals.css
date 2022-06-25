@@ -16,5 +16,22 @@ a {
 }
 
 * {
+	color: black;
 	box-sizing: border-box;
+}
+
+.container {
+	padding: 0 1rem;
+	margin: 0.5rem auto;
+	color: black;
+}
+
+.dot {
+}
+
+.shadow {
+	box-shadow: 0.75rem 0.75rem black;
+}
+.shadow-small {
+	box-shadow: 0.1rem 0.1rem black;
 }
