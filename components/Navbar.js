@@ -13,7 +13,9 @@ export default function Navbar() {
 				<p className="bg-black rounded-xl h-1 w-1 " />
 				<p className="mx-4">Wanna be Gamer</p>
 			</div>
-			<div className="px-4 py-2 rounded-lg bg-black text-white">Let's Connect</div>
+			<div className="px-4 py-2 rounded-lg bg-black text-white">
+				Let&apos;s Connect
+			</div>
 		</nav>
 	);
 }

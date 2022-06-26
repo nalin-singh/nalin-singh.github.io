@@ -12,9 +12,10 @@ export default function Hero() {
 					Clean Tech
 				</p>
 				<p className="mt-12 max-w-[60%] text-semibold text-lg">
-					I'm  a Designer & Developer based out of Bangalore, India. I work with
-					startups and enterprises to build frontend and marketing solutions,
-					interested in understanding businesses and code.
+					I&apos;m Nalin Singh, a self-taught Designer & Developer based out of
+					Bangalore, India. I work with startups and enterprises to build
+					frontend and marketing solutions, interested in understanding
+					businesses and code.
 				</p>
 				<Image src={HeroImage} alt="Motivated Kid" />
 			</div>

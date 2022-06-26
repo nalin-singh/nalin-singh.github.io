@@ -20,8 +20,11 @@ a {
 	box-sizing: border-box;
 }
 
+section {
+	padding: 3rem 0;
+}
+
 .container {
-	padding: 0 1rem;
 	margin: 0.5rem auto;
 	color: black;
 }
