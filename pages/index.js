@@ -11,7 +11,7 @@ import VerticalCard from "../components/VerticalCard";
 /* Imported Icons */
 import Docker from "../icons/Docker.svg";
 import Figma from "../icons/Figma.svg";
-import Github from "../icons/Github.svg";
+import Github from "../icons/GitHub.svg";
 import Medium from "../icons/Medium.svg";
 import Metamask from "../icons/Metamask.svg";
 import Netlify from "../icons/Netlify.svg";
