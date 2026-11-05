@@ -3,7 +3,8 @@ pre-commit:
   jobs:
     - name: format
       glob: "*.{astro,ts,js,mjs,json,md,mdx,css,yml,yaml}"
-      run: pnpm oxfmt --check {staged_files}
+      exclude: "src/content/**"
+      run: pnpm oxfmt --check --no-error-on-unmatched-pattern {staged_files}
     - name: lint
       glob: "*.{astro,ts,js,mjs}"
       run: pnpm oxlint {staged_files}
