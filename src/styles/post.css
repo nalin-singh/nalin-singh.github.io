@@ -573,3 +573,12 @@
 .lost .signoff {
   margin-bottom: 26px;
 }
+
+/* case studies: the blueprint sits full width under the header */
+.case-drawing {
+  display: grid;
+  padding-block: clamp(28px, 4vw, 48px) 0;
+}
+.case-drawing .bp {
+  grid-column: 1 / -1;
+}

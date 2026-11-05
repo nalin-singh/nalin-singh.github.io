@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+
+import WorkLayout from "~/layouts/work-layout.astro";
+
+export const getStaticPaths = (async () => {
+  const entries = (await getCollection("work")).toSorted((a, b) => a.data.order - b.data.order);
+  return entries.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: entries[(i + 1) % entries.length] },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry, next } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<WorkLayout entry={entry} headings={headings} next={next}>
+  <Content />
+</WorkLayout>
