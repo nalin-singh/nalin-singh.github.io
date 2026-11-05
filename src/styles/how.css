@@ -1,0 +1,494 @@
+/* How I work: kraft luggage tags hanging from a rope. The rope runs down the middle on tablets and down the left on phones. */
+.how2 {
+  border-top: 1.5px solid var(--ink);
+}
+.thesis {
+  font-family: var(--display);
+  font-weight: 850;
+  font-stretch: 72%;
+  font-size: clamp(30px, 3.6vw, 54px);
+  line-height: 1.04;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  max-width: 24ch;
+  text-wrap-style: balance;
+}
+.thesis span {
+  color: var(--bp-2);
+  background-image: linear-gradient(transparent 72%, rgba(142, 166, 118, 0.45) 72%);
+}
+.rope {
+  position: relative;
+  height: 400px;
+  margin-top: 10px;
+}
+.ropesvg {
+  position: absolute;
+  left: -2%;
+  width: 104%;
+  top: 0px;
+  height: 380px;
+  overflow: visible;
+}
+.rp {
+  fill: none;
+  stroke-linecap: round;
+  filter: url("#wobble");
+}
+.rp2 {
+  fill: none;
+  stroke: var(--soft);
+  stroke-width: 1.6;
+  stroke-dasharray: 3, 7;
+  opacity: 0.7;
+}
+.rope.draw .rp {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: 1.4s cubic-bezier(0.3, 0.6, 0.2, 1) 0s 1 normal forwards running ropein;
+}
+.tags {
+  list-style-type: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  position: absolute;
+  inset: 0px;
+}
+.tag {
+  transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.4, 1);
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 12.6%;
+  transform-origin: 50% -26px;
+  transform: rotate(calc(var(--r) * 0.5));
+  padding: 30px 14px 16px;
+  border-radius: 6px 6px 4px 4px;
+  clip-path: polygon(18% 0px, 82% 0px, 100% 12%, 100% 100%, 0px 100%, 0px 12%);
+}
+.tag::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tag .hole {
+  background: var(--paper);
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+}
+.tag .no {
+  position: absolute;
+  right: 12px;
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 60%;
+  line-height: 1;
+}
+.tag h4 {
+  margin-top: 6px;
+  margin-bottom: 8px;
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 64%;
+  text-transform: uppercase;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 0.92;
+  max-width: 9ch;
+}
+.tag p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: clamp(12.5px, 1vw, 14px);
+  line-height: 1.4;
+}
+.tag:hover {
+  transform: rotate(calc(var(--r) * -0.9));
+}
+.rope.draw .tag {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.3, 1.5, 0.4, 1);
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-play-state: running;
+  animation-name: drop;
+  animation-timeline: auto;
+  animation-range: normal;
+  animation-delay: calc(var(--i) * 110ms + 0.6s);
+}
+.loopnote {
+  position: absolute;
+  right: 6%;
+  bottom: 6px;
+  font-family: var(--hand);
+  font-size: 20px;
+  color: var(--soft);
+  transform: rotate(-3deg);
+}
+.tag:focus-within {
+  outline: 2px solid var(--orange);
+}
+@media (max-width: 900px) {
+  .rope {
+    height: auto;
+    padding-top: 6px;
+    padding-bottom: 40px;
+  }
+  .ropesvg {
+    display: none;
+  }
+  .rope::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    bottom: 40px;
+  }
+  .tags {
+    position: relative;
+    display: grid;
+    gap: 14px;
+  }
+  .tag {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: calc(50% - 22px);
+    padding-top: 16px;
+    padding-right: 38px;
+    clip-path: none;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 6px;
+    transform-origin: calc(100% + 22px) 50%;
+  }
+  .tag:nth-child(2n) {
+    margin-left: auto;
+    padding-right: 14px;
+    padding-left: 38px;
+    border-radius: 16px 6px 6px 16px;
+    transform-origin: -22px 50%;
+  }
+  .tags .tag .hole {
+    left: auto;
+    right: 12px;
+    top: 50%;
+    margin-top: -7.5px;
+    margin-left: 0px;
+  }
+  .tags .tag:nth-child(2n) .hole {
+    right: auto;
+    left: 12px;
+  }
+  .tags .tag::before {
+    left: auto;
+    right: -22px;
+    top: 50%;
+    width: 24px;
+    height: 2px;
+    transform: none;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgb(94, 65, 39) 0px,
+      rgb(94, 65, 39) 3px,
+      rgb(164, 123, 75) 3px,
+      rgb(164, 123, 75) 5px
+    );
+  }
+  .tags .tag:nth-child(2n)::before {
+    right: auto;
+    left: -22px;
+  }
+  .tags .tag .no {
+    right: 34px;
+    top: auto;
+    bottom: 8px;
+    font-size: 34px;
+  }
+  .tags .tag:nth-child(2n) .no {
+    right: 12px;
+  }
+  .tags .tag h4 {
+    padding-right: 0px;
+  }
+  .tag h4 {
+    font-size: 20px;
+    max-width: none;
+  }
+  .tag p {
+    font-size: 13.5px;
+  }
+  .tag:hover {
+    transform: rotate(calc(var(--r) * -0.5));
+  }
+  .rope.draw .tag {
+    animation: auto ease 0s 1 normal none running none;
+  }
+  .loopnote {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rope.draw .rp,
+  .rope.draw .tag {
+    animation: auto ease 0s 1 normal none running none;
+  }
+}
+.rp {
+  stroke: rgb(94, 65, 39);
+  stroke-width: 6;
+}
+.rp.tw {
+  stroke: rgb(192, 147, 99);
+  stroke-width: 2.4;
+  stroke-dasharray: 4, 5;
+}
+.rope.draw .rp.tw {
+  opacity: 0;
+  animation: 0.4s ease-out 1.2s 1 normal forwards running twin;
+}
+.tag {
+  --tc: #c49a64;
+  --tx: #241c12;
+  --tn: rgba(142, 60, 34, 0.55);
+  color: var(--tx);
+  box-shadow:
+    rgba(60, 40, 20, 0.28) 0px 0px 0px 1.5px inset,
+    rgba(60, 40, 20, 0.35) 0px -14px 22px -16px inset;
+  background: var(--tc) !important;
+}
+.tag.kraft2 {
+  --tc: #b48653;
+}
+.tag.green {
+  --tc: #24402f;
+  --tx: #efe6d2;
+  --tn: rgba(239, 230, 210, 0.22);
+}
+.tag.navy {
+  --tc: #1d2640;
+  --tx: #e9ecf4;
+  --tn: rgba(233, 236, 244, 0.2);
+}
+.tag::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(97deg, rgba(60, 35, 10, 0.07) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(8deg, rgba(255, 240, 210, 0.06) 0 1px, transparent 1px 9px);
+  background-size:
+    170px auto,
+    auto,
+    auto;
+}
+.tag.green::after,
+.tag.navy::after {
+  opacity: 0.35;
+}
+.tag::after {
+  border-radius: inherit;
+}
+.tag .hole {
+  background: radial-gradient(
+    circle,
+    var(--paper) 0 3.6px,
+    #c9a24e 4px 5.4px,
+    #7f6128 5.8px 6.6px,
+    transparent 7px
+  );
+  width: 15px;
+  height: 15px;
+  margin-left: -7.5px;
+  top: 9px;
+  z-index: 2;
+}
+.tag::before {
+  width: 2px;
+  background-image: repeating-linear-gradient(
+    rgb(94, 65, 39) 0px,
+    rgb(94, 65, 39) 3px,
+    rgb(164, 123, 75) 3px,
+    rgb(164, 123, 75) 5px
+  );
+  top: -31px;
+  height: 42px;
+  z-index: 1;
+}
+.tag .no {
+  color: var(--tn);
+  font-size: 50px;
+  top: 20px;
+  mix-blend-mode: multiply;
+  filter: url("#ink");
+}
+.tag.green .no,
+.tag.navy .no {
+  mix-blend-mode: normal;
+}
+.tag p {
+  opacity: 0.9;
+}
+.tag {
+  filter: drop-shadow(rgba(40, 25, 10, 0.28) 0px 10px 10px)
+    drop-shadow(rgba(40, 25, 10, 0.2) 0px 2px 1px);
+}
+@media (max-width: 600px) {
+  .rope {
+    padding-top: 4px;
+    padding-bottom: 34px;
+  }
+  .rope::before {
+    left: 2px;
+    width: 34px;
+    bottom: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='360' viewBox='0 0 34 360'%3E%3Cpath d='M17 0 C 29 90 5 90 17 180 S 29 270 17 360' fill='none' stroke='%235e4127' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M17 0 C 29 90 5 90 17 180 S 29 270 17 360' fill='none' stroke='%23b0865a' stroke-width='2.2' stroke-dasharray='3 5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-position: 0px 0px;
+    background-size: 34px 360px;
+    background-repeat: repeat-y;
+    filter: url("#rule-rough");
+  }
+  .tags {
+    gap: 22px;
+  }
+  .tags .tag,
+  .tags .tag:nth-child(2n) {
+    width: calc(100% - 52px);
+    margin-left: 52px;
+    padding-right: 16px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    border-radius: 14px 6px 6px 14px;
+    transform-origin: -34px 30px;
+    transform: rotate(calc(var(--r) * 0.6));
+  }
+  .tags .tag:nth-child(4n + 2) {
+    margin-left: 66px;
+    width: calc(100% - 66px);
+  }
+  .tags .tag:nth-child(4n + 3) {
+    margin-left: 58px;
+    width: calc(100% - 64px);
+  }
+  .tags .tag:nth-child(4n) {
+    margin-left: 48px;
+    width: calc(100% - 54px);
+  }
+  .tags .tag .hole,
+  .tags .tag:nth-child(2n) .hole {
+    left: 13px;
+    right: auto;
+    top: 30px;
+  }
+  .tags .tag::before,
+  .tags .tag:nth-child(2n)::before {
+    left: -34px;
+    right: auto;
+    top: 29px;
+    width: 40px;
+    transform: rotate(-6deg);
+    transform-origin: left center;
+  }
+  .tags .tag:nth-child(4n + 2)::before {
+    left: -48px;
+    width: 54px;
+  }
+  .tags .tag .no,
+  .tags .tag:nth-child(2n) .no {
+    right: 14px;
+    top: 10px;
+    bottom: auto;
+    font-size: 40px;
+  }
+  .tags .tag h4 {
+    font-size: 22px;
+    padding-right: 40px;
+  }
+  .tags .tag p {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .tags .tag:hover {
+    transform: rotate(calc(var(--r) * -0.4));
+  }
+  .loopnote {
+    text-align: left;
+    margin-left: 52px;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .rope::before {
+    width: 34px;
+    margin-left: -17px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='360' viewBox='0 0 34 360'%3E%3Cpath d='M17 0 C 29 90 5 90 17 180 S 29 270 17 360' fill='none' stroke='%235e4127' stroke-width='5.5' stroke-linecap='round'/%3E%3Cpath d='M17 0 C 29 90 5 90 17 180 S 29 270 17 360' fill='none' stroke='%23b0865a' stroke-width='2.2' stroke-dasharray='3 5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-position: 0px 0px;
+    background-size: 34px 360px;
+    background-repeat: repeat-y;
+    filter: url("#rule-rough");
+  }
+  .tags .tag {
+    transform: rotate(calc(var(--r) * 0.7));
+  }
+  .tags .tag:nth-child(2n) {
+    margin-right: 6px;
+  }
+  .tags .tag:nth-child(2n + 1) {
+    margin-left: 6px;
+  }
+}
+@media (max-width: 900px) {
+  .rope.draw .tags .tag,
+  .tags .tag {
+    animation-duration: 4.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-name: sway;
+    animation-timeline: auto;
+    animation-range: normal;
+    animation-delay: calc(var(--i) * -0.6s);
+  }
+  .tags .tag:hover,
+  .tags .tag:active {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tags .tag {
+    animation: auto ease 0s 1 normal none running none !important;
+  }
+}
+@keyframes ropein {
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 1600;
+  }
+}
+@keyframes twin {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    rotate: -1.1deg;
+  }
+  50% {
+    rotate: 1.1deg;
+  }
+}
