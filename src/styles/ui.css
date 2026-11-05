@@ -1,13 +1,10 @@
-/* Shared pieces: mono labels, inked display type, the pressable button and the RSS chip. */
+/* Shared pieces: mono labels, the pressable button and the RSS chip. */
 .mono {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1.5;
-}
-.inked {
-  filter: url("#ink");
 }
 .press {
   --o: 4px;

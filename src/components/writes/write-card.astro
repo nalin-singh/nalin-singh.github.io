@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 
 import { icons, tones } from "~/data/icons";
+import { roughen } from "~/lib/rough";
 
 import "~/styles/write-card.css";
 
@@ -24,8 +25,13 @@ const { topic, minutes, draft, icon, title, description } = post.data;
       {minutes} min{draft ? " · draft" : ""}
     </span>
   </span>
-  <svg class="wicon" viewBox="0 0 64 64" aria-hidden="true" set:html={icons[icon]} />
-  <h3 class="inked">{title}</h3>
+  <svg
+    class="wicon"
+    viewBox="0 0 64 64"
+    aria-hidden="true"
+    set:html={roughen(icons[icon], "wobble")}
+  />
+  <h3>{title}</h3>
   <p>{description}</p>
   <span class="rd">
     <span class="back"></span>

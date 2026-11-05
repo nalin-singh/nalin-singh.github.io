@@ -1,0 +1,17 @@
+---
+import { type Look, roughen } from "~/lib/rough";
+
+/**
+ * Bakes the hand-drawn look into the SVG inside it, at build time.
+ * Shapes marked `data-rough` always get their look; with `look`, shapes matching `only` do too.
+ */
+interface Props {
+  look?: Look;
+  only?: string[];
+}
+
+const { look, only } = Astro.props;
+const markup = await Astro.slots.render("default");
+---
+
+<Fragment set:html={roughen(markup, look, only)} />

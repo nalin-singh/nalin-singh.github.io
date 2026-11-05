@@ -33,11 +33,11 @@ Git hooks (lefthook) check formatting and lint on commit, and types on push.
 
 ```
 src/
-  components/   chrome (bar, footer, filters), home sections, blueprints, writes, ui
+  components/   chrome (bar, footer), home sections, blueprints, writes, ui
   content/      writes, as Markdown or MDX
   data/         copy and content for the home page
   layouts/      the base sheet and the post layout
-  lib/          collection helpers and the code block frame
+  lib/          collection helpers, the code block frame and the baked roughness
   pages/        routes: home, writes, RSS feed, 404
   scripts/      typed interaction modules, one per behaviour
   styles/       tokens, then one stylesheet per component

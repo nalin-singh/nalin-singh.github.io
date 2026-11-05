@@ -36,8 +36,9 @@
 
   /* textures */
   --grain: url("/textures/grain.png");
-  --grain-ink: url("/textures/grain-ink.png");
-  --grain-dark: url("/textures/grain-dark.png");
+  --grain-multiply: url("/textures/grain-multiply.png");
+  --grain-soft: url("/textures/grain-soft.png");
+  --grain-overlay: url("/textures/grain-overlay.png");
   --frame-grain: url("/textures/frame.png");
   --paper-edge: url("/textures/paper-edge.svg");
 

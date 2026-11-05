@@ -22,9 +22,8 @@ footer h2 span {
   content: "";
   position: absolute;
   inset: 0px;
-  background-image: var(--grain-dark);
+  background-image: var(--grain-overlay);
   background-size: 220px auto;
-  mix-blend-mode: overlay;
   opacity: 0.35;
   pointer-events: none;
 }
@@ -155,7 +154,7 @@ footer h2 span {
     auto,
     200px auto;
   background-blend-mode: normal, multiply;
-  filter: url("#rough-edge");
+  clip-path: var(--rough-l1);
   z-index: 3;
 }
 .ft {
@@ -279,6 +278,7 @@ footer h2 span {
   align-items: center;
   padding: 16px 18px;
   text-decoration-line: none;
+  border-image: var(--flecks);
   filter: drop-shadow(rgba(10, 8, 6, 0) 0px 0px 0px);
 }
 .plate2::before {
@@ -287,16 +287,15 @@ footer h2 span {
   position: absolute;
   inset: 0px;
   z-index: -1;
-  filter: url("#rough-edge-sm");
+  clip-path: var(--rough-s0);
 }
 .plate2::after {
   content: "";
   position: absolute;
   inset: 0px;
   z-index: -1;
-  background-image: var(--grain);
+  background-image: var(--grain-soft);
   background-size: 200px auto;
-  mix-blend-mode: soft-light;
   opacity: 0.7;
   pointer-events: none;
 }
@@ -312,7 +311,6 @@ footer h2 span {
   font-weight: 900;
   font-stretch: 80%;
   font-size: 20px;
-  filter: url("#wobble");
 }
 .plate2 .plt {
   display: grid;
@@ -407,7 +405,6 @@ footer h2 span {
   color: rgb(228, 217, 192);
   -webkit-text-stroke: 0px;
   clip-path: inset(102% 0px 0px);
-  filter: url("#ink");
 }
 .ft-plate:hover .lt::after,
 .ft-plate.on .lt::after {
@@ -429,7 +426,6 @@ footer h2 span {
   background-color: rgb(228, 217, 192);
   border-radius: 50%;
   opacity: 0;
-  filter: url("#ink");
 }
 .ft-plate .lt::before {
   display: none;

@@ -48,31 +48,50 @@ Design work uses navy (`#1d2640`). Each writing topic has its card colour in `sr
 | `--mono`    | Martian Mono | Labels, meta, code. Uppercase at 9 to 11px with open tracking                |
 | `--hand`    | Patrick Hand | Margin notes, drawing labels, asides                                         |
 
-`.mono` gives the standard label style. `.inked` roughens display type with the `#ink` filter. Keep it on headings, not paragraphs.
+`.mono` gives the standard label style.
 
 ## Texture
 
-The page-sized surfaces use baked images, because live filters on them are too expensive (see [performance](./performance.md)).
+Every texture is a static image. Nothing on the site uses a live SVG filter or a blend mode (see [performance](./performance.md)).
 
-| Token           | File                      | Use                                                  |
-| --------------- | ------------------------- | ---------------------------------------------------- |
-| `--paper-edge`  | `textures/paper-edge.svg` | The sheet's rough outline, as a 9-slice border image |
-| `--grain-ink`   | `textures/grain-ink.png`  | Paper grain, ink on transparent                      |
-| `--frame-grain` | `textures/frame.png`      | The charcoal table's grain                           |
-| `--grain`       | `textures/grain.png`      | Grain for small cards, with `multiply`               |
-| `--grain-dark`  | `textures/grain-dark.png` | Grain for the dark footer, with `overlay`            |
+| Token              | File                          | Use                                                               |
+| ------------------ | ----------------------------- | ----------------------------------------------------------------- |
+| `--paper-edge`     | `textures/paper-edge.svg`     | The sheet's rough outline, as a 9-slice border image              |
+| `--frame-grain`    | `textures/frame.png`          | The charcoal table's grain, pre-blended onto the frame colour     |
+| `--grain`          | `textures/grain.png`          | Plain grain for paper strips                                      |
+| `--grain-multiply` | `textures/grain-multiply.png` | Grain that darkens: ink on transparent, for paper and light cards |
+| `--grain-soft`     | `textures/grain-soft.png`     | Grain that lightens: white speckle, for dark cards and blueprints |
+| `--grain-overlay`  | `textures/grain-overlay.png`  | Grain that does both, for the dark footer                         |
 
-## Filters
+The three grain tiles stand in for blend modes. A grey grain `v` multiplied at opacity `o` is the same as black at alpha `o × (1 − v)`, so `--grain-multiply` keeps the old look exactly. Soft-light and overlay are approximated the same way, within a few percent.
 
-Defined once in `src/components/chrome/svg-filters.astro`, used through `filter: url(#id)`.
+## Roughness
 
-| Filter          | Effect                      | Use on                                   |
-| --------------- | --------------------------- | ---------------------------------------- |
-| `rough-edge`    | Large, soft displacement    | Cards up to a few hundred pixels tall    |
-| `rough-edge-sm` | Finer displacement          | Blueprints, spines, buttons, code frames |
-| `wobble`        | Slow wave along a line      | SVG strokes in drawings and icons        |
-| `rule-rough`    | Breaks up a horizontal rule | Section rules only                       |
-| `ink`           | Fine bleed on type          | Display headings via `.inked`            |
+The hand-drawn look is computed once, at build time, by `src/lib/rough.ts`. The browser only ever draws plain shapes.
+
+| Look      | Feels like              | Where                                          |
+| --------- | ----------------------- | ---------------------------------------------- |
+| `wobble`  | A line drawn freehand   | Blueprint lines, icons, the rope, post figures |
+| `edge-sm` | Paper cut with scissors | Board screens, the stamp, the bookend          |
+| `edge`    | Torn paper              | Available for larger SVG pieces                |
+
+**SVG.** Wrap a drawing in `<Rough>` (`ui/rough.astro`). It redraws each shape along a seeded noise field, so the same markup always comes out the same.
+
+```astro
+<Rough look="wobble" only={["ln", "dash", "hot"]}>
+  <svg viewBox="0 0 760 284">…</svg>
+</Rough>
+```
+
+- `look` with `only` bakes the shapes carrying one of those classes. `look` alone bakes every shape.
+- `data-rough="edge-sm"` on a single shape bakes just that one.
+- Anything inside `<defs>` is left alone, because text and motion follow that geometry exactly.
+
+**HTML boxes.** Use a pre-computed jagged outline as a clip path: `clip-path: var(--rough-s0)` (small, `s0` to `s2`) or `var(--rough-l0)` (large, `l0` to `l2`). Vary the number between neighbours so they don't share an edge.
+
+**Rules and chips.** `var(--rule-double)` and `var(--rule-single)` are dry-brush rules for section dividers. `border-image: var(--flecks)` adds paper-coloured chips around a dark plate.
+
+These custom properties come from `/rough.css`, which `src/pages/rough.css.ts` generates at build time.
 
 ## Components
 

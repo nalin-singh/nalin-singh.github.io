@@ -1,7 +1,6 @@
 ---
 import SiteBar from "~/components/chrome/site-bar.astro";
 import SiteFooter from "~/components/chrome/site-footer.astro";
-import SvgFilters from "~/components/chrome/svg-filters.astro";
 import { site } from "~/data/site";
 
 import "~/styles/tokens.css";
@@ -27,6 +26,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/rough.css" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -46,7 +46,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
-    <SvgFilters />
     <div class="outer">
       <div class="sheet">
         <SiteBar />

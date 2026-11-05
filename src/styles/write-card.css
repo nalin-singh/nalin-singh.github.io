@@ -29,7 +29,7 @@
   position: absolute;
   inset: 0px;
   z-index: -2;
-  filter: url("#rough-edge");
+  clip-path: var(--rough-l0);
 }
 .wcard::after {
   content: "";
@@ -37,12 +37,11 @@
   inset: 0px;
   z-index: -1;
   background-image:
-    var(--grain),
+    var(--grain-soft),
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 28px);
   background-size:
     200px auto,
     auto;
-  mix-blend-mode: soft-light;
   opacity: 0.7;
   pointer-events: none;
 }
@@ -129,7 +128,6 @@
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: url("#wobble");
   margin-top: 6px;
 }
 .wcard h3 {

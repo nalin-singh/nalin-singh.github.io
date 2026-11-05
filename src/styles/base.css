@@ -37,7 +37,7 @@ a {
   margin-left: auto;
   isolation: isolate;
 }
-/* The sheet is page-sized, so its rough edge and grain are baked images, not live filters or blend modes. */
+/* The sheet's rough edge and grain are baked images, like every texture on the site. */
 .sheet::before {
   content: "";
   position: absolute;
@@ -51,8 +51,9 @@ a {
   position: absolute;
   inset: 0px;
   z-index: -1;
-  background-image: var(--grain-ink);
+  background-image: var(--grain-multiply);
   background-size: 200px auto;
+  opacity: 0.4;
   pointer-events: none;
 }
 .pad {
