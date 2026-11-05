@@ -1,15 +1,12 @@
 ---
-import { getCollection } from "astro:content";
-
 import WriteCard from "~/components/writes/write-card.astro";
 import { reads } from "~/data/reads";
+import { ordered } from "~/lib/writes";
 
 import "~/styles/reads-writes.css";
 
 /** The home page shows the five pinned writes, in order. */
-const posts = (await getCollection("writes"))
-  .filter((post) => post.data.order <= 5)
-  .toSorted((a, b) => a.data.order - b.data.order);
+const posts = (await ordered()).filter((post) => post.data.order <= 5);
 ---
 
 <section class="rw pad" id="writing" aria-label="Reads and writes">

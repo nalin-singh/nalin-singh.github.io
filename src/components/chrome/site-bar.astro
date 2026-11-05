@@ -2,6 +2,10 @@
 import { nav, site } from "~/data/site";
 
 import "~/styles/bar.css";
+
+/** Marks the nav item whose own page (such as /writes/) is open. */
+const here = (item: (typeof nav)[number]) =>
+  "page" in item && Astro.url.pathname.startsWith(item.page) ? "page" : undefined;
 ---
 
 <div class="bar pad mono">
@@ -19,7 +23,9 @@ import "~/styles/bar.css";
   </a>
   <nav class="dnav" aria-label="Main">
     {nav.map((item) => (
-      <a href={item.href}>{item.label}</a>
+      <a href={item.href} aria-current={here(item)}>
+        {item.label}
+      </a>
     ))}
   </nav>
   <span class="clock" id="clock">
@@ -35,7 +41,9 @@ import "~/styles/bar.css";
   <div class="mnav" id="mnav" hidden>
     <nav aria-label="Main">
       {nav.map((item) => (
-        <a href={item.href}>{item.label}</a>
+        <a href={item.href} aria-current={here(item)}>
+          {item.label}
+        </a>
       ))}
     </nav>
     <span class="mclock">

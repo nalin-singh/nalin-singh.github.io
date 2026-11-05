@@ -1,0 +1,101 @@
+---
+import type { MarkdownHeading } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+import WriteCard from "~/components/writes/write-card.astro";
+import { tones } from "~/data/icons";
+import { site } from "~/data/site";
+import BaseLayout from "~/layouts/base-layout.astro";
+
+import "~/styles/post.css";
+
+/** A write, on the same sheet as the home page: header, contents rail, prose, then where to go next. */
+interface Props {
+  post: CollectionEntry<"writes">;
+  headings: MarkdownHeading[];
+  next?: CollectionEntry<"writes">;
+}
+
+const { post, headings, next } = Astro.props;
+const { title, description, date, minutes, topic, tags, draft } = post.data;
+const parts = headings.filter((heading) => heading.depth === 2);
+const day = date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const filed = [...new Set([topic, ...tags])];
+const tone = (tag: string) => (tag in tones ? tones[tag as keyof typeof tones] : undefined);
+---
+
+<BaseLayout title={`${title} · ${site.name}`} description={description} kind="article">
+  <div class="progress" aria-hidden="true">
+    <i id="prog"></i>
+  </div>
+
+  <header class="head pad" id="top">
+    <div class="crumbs mono">
+      <a href="/writes/">Writes</a>
+      <span>/</span>
+      <span>{topic}</span>
+    </div>
+    <h1 class="inked">{title}</h1>
+    <p class="dek">{description}</p>
+    <div class="meta mono">
+      <time datetime={date.toISOString()}>{day}</time>
+      <span>{minutes} min read</span>
+      <span class="pill" style={`--c:${tones[topic]}`}>
+        {topic}
+      </span>
+      {draft && <span class="draft">Draft</span>}
+    </div>
+  </header>
+
+  <div class="post pad">
+    <nav class="toc" id="toc" aria-label="Contents">
+      {parts.length > 0 && (
+        <>
+          <span class="mono">Contents</span>
+          {parts.map((part, i) => (
+            <a href={`#${part.slug}`}>
+              <i>{i + 1}</i>
+              {part.text}
+            </a>
+          ))}
+        </>
+      )}
+    </nav>
+    <article class="prose">
+      <slot />
+    </article>
+  </div>
+
+  <div class="end pad">
+    <div class="filed">
+      <span class="mono">Filed under</span>
+      <div class="tags">
+        {filed.map((tag) => (
+          <span class="tag mono" style={tone(tag) && `--c:${tone(tag)}`}>
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div class="share">
+        <a class="press y" href="#top">
+          <span class="back"></span>
+          <span class="face">↑ Back to top</span>
+        </a>
+        <a class="press" href={site.links.linkedin} target="_blank" rel="noopener">
+          <span class="back"></span>
+          <span class="face">Talk about it on LinkedIn ↗</span>
+        </a>
+      </div>
+      <p class="signoff">Thanks for reading. Disagree? Even better, tell me.</p>
+    </div>
+    {next && (
+      <WriteCard post={next} label={`Next read · ${next.data.topic}`} cta="Keep reading →" />
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  import { startReading } from "~/scripts/reading";
+
+  startReading();
+</script>

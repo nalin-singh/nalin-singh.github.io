@@ -183,3 +183,6 @@
     transform: none;
   }
 }
+.bar nav a[aria-current]::after {
+  transform: scaleX(1);
+}

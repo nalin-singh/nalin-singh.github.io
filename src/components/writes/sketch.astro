@@ -1,0 +1,13 @@
+---
+/** A blueprint figure: a sketched SVG on the green grid, with a mono caption. */
+interface Props {
+  caption: string;
+}
+
+const { caption } = Astro.props;
+---
+
+<figure class="fig">
+  <slot />
+  <figcaption class="mono">{caption}</figcaption>
+</figure>

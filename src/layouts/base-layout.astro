@@ -11,9 +11,10 @@ import "~/styles/ui.css";
 interface Props {
   title?: string;
   description?: string;
+  kind?: "website" | "article";
 }
 
-const { title = site.title, description = site.description } = Astro.props;
+const { title = site.title, description = site.description, kind = "website" } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -34,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={kind} />
     <meta property="og:url" content={canonical} />
     <meta name="theme-color" content="#1f1d1a" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
