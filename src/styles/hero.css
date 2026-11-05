@@ -175,7 +175,8 @@
   display: flex;
   align-items: center;
   isolation: isolate;
-  clip-path: inset(-8px 0);
+  /* must stay overflow, not clip-path: the run of words is thousands of pixels long */
+  overflow: hidden;
 }
 .band::before {
   content: "";
