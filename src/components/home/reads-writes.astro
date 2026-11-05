@@ -1,0 +1,138 @@
+---
+import { getCollection } from "astro:content";
+
+import { icons, tones } from "~/data/icons";
+import { reads } from "~/data/reads";
+
+import "~/styles/reads-writes.css";
+
+/** The home page shows the five pinned writes, in order. */
+const posts = (await getCollection("writes"))
+  .filter((post) => post.data.order <= 5)
+  .toSorted((a, b) => a.data.order - b.data.order);
+---
+
+<section class="rw pad" id="writing" aria-label="Reads and writes">
+  <div class="subh">
+    <h2 class="inked">Writes</h2>
+    <span class="hnote">
+      things I wrote down{" "}
+      <svg viewBox="0 0 40 24" aria-hidden="true">
+        <path d="M2 4 C 14 2 26 8 30 20 M30 20 l-7 -3 M30 20 l2 -8" />
+      </svg>
+    </span>
+    <a class="rss mono" href="/rss.xml">
+      RSS
+    </a>
+  </div>
+  <div class="wcards">
+    {posts.map((post, i) => (
+      <a
+        class:list={["wcard", { wide: i === 0 }]}
+        href={`/writes/${post.id}/`}
+        style={`--c:${tones[post.data.topic]}`}
+      >
+        <span class="top mono">
+          <span>
+            Write {String(i + 1).padStart(2, "0")} · {post.data.topic}
+          </span>
+          <span>
+            {post.data.minutes} min{post.data.draft ? " · draft" : ""}
+          </span>
+        </span>
+        <svg
+          class="wicon"
+          viewBox="0 0 64 64"
+          aria-hidden="true"
+          set:html={icons[post.data.icon]}
+        />
+        <h3 class="inked">{post.data.title}</h3>
+        <p>{post.data.description}</p>
+        <span class="rd">
+          <span class="back" />
+          <span class="face">Read ↗</span>
+        </span>
+      </a>
+    ))}
+  </div>
+  <div class="readsrow">
+    <div class="reads">
+      <div class="subh">
+        <h2 class="inked">Reads</h2>
+        <span class="hnote">
+          books on my desk{" "}
+          <svg viewBox="0 0 40 24" aria-hidden="true">
+            <path d="M2 4 C 14 2 26 8 30 20 M30 20 l-7 -3 M30 20 l2 -8" />
+          </svg>
+        </span>
+      </div>
+      <div class="shelf" id="shelf">
+        <div class="books">
+          {reads.map((book) => (
+            <button
+              class="spine"
+              type="button"
+              style={`--h:${book.height};--w:${book.width};--c:${book.cover};--t:${book.ink}`}
+              data-t={book.title}
+              data-m={book.shelf}
+              data-k={book.takeaway}
+            >
+              <span class="sp">{book.title}</span>
+              <i />
+            </button>
+          ))}
+          <span class="bookend" aria-hidden="true">
+            <svg viewBox="0 0 90 200">
+              <path d="M4 200 V22 C 50 22 86 92 86 200 Z" fill="#6b4a2d" />
+              <path d="M4 22 C 50 22 86 92 86 200" fill="none" stroke="#8a6440" stroke-width="3" />
+              <path
+                d="M14 196 C 20 140 14 90 22 34 M30 196 C 36 140 32 100 40 44 M50 196 C 54 150 50 110 58 70 M68 196 C 70 160 68 130 74 110"
+                fill="none"
+                stroke="#5a3d24"
+                stroke-width="1.4"
+                opacity=".7"
+              />
+              <rect x="4" y="22" width="5" height="178" fill="#4a321e" />
+              <rect x="0" y="194" width="90" height="6" fill="#4a321e" />
+            </svg>
+          </span>
+          <span class="pullhint" aria-hidden="true">
+            <svg viewBox="0 0 60 40">
+              <path d="M56 34 C 40 34 20 26 10 8 M10 8 l-2 9 M10 8 l9 2" />
+            </svg>
+            pull one out
+          </span>
+        </div>
+        <div class="plank" aria-hidden="true"></div>
+        <div class="libcard" id="takeaway" aria-live="polite">
+          <span class="lc-head mono">
+            <span>Library card</span>
+            <span>N. Singh · desk copy</span>
+          </span>
+          <span class="lc-row mono">
+            <b>Title</b>
+            <span id="tk-t">Pick a book</span>
+          </span>
+          <span class="lc-row mono">
+            <b>Shelf</b>
+            <span id="tk-m">Hover or tap a spine</span>
+          </span>
+          <span class="lc-take">
+            <b class="mono">What I took from it</b>
+            <span id="tk-k">Each one has the thing I actually took from it.</span>
+          </span>
+          <span class="lc-stamp mono" id="tk-stamp">
+            Read
+            <br />✓
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { startShelf } from "~/scripts/shelf";
+
+  startShelf();
+</script>
