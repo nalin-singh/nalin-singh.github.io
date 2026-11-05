@@ -1,6 +1,13 @@
 ---
 import Arrow from "~/components/ui/arrow.astro";
 import Rough from "~/components/ui/rough.astro";
+
+/** On its own case study page the drawing is the hero, so it drops the Read button. */
+interface Props {
+  standalone?: boolean;
+}
+
+const { standalone = false } = Astro.props;
 ---
 
 <article class="bp" data-bp>
@@ -78,10 +85,12 @@ import Rough from "~/components/ui/rough.astro";
       </svg>
     </Rough>
   </div>
-  <a class="press more" href="/#work">
-    <span class="back"></span>
-    <span class="face">
-      Read <Arrow />
-    </span>
-  </a>
+  {!standalone && (
+    <a class="press more" href="/work/file-ops/">
+      <span class="back" />
+      <span class="face">
+        Read the case study <Arrow to="e" />
+      </span>
+    </a>
+  )}
 </article>

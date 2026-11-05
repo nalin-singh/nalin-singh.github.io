@@ -3,22 +3,35 @@ import { all, calm, one } from "./dom";
 /** Lets a horizontal track be dragged with a mouse. Wheel and touch scrolling stay native. */
 const drag = (track: HTMLElement) => {
   let down = false;
+  let moved = false;
   let startX = 0;
   let startLeft = 0;
   track.addEventListener("pointerdown", (event) => {
     if (event.pointerType !== "mouse") return;
     down = true;
+    moved = false;
     startX = event.clientX;
     startLeft = track.scrollLeft;
     track.classList.add("drag");
   });
   addEventListener("pointermove", (event) => {
-    if (down) track.scrollLeft = startLeft - (event.clientX - startX);
+    if (!down) return;
+    if (Math.abs(event.clientX - startX) > 5) moved = true;
+    track.scrollLeft = startLeft - (event.clientX - startX);
   });
   addEventListener("pointerup", () => {
     down = false;
     track.classList.remove("drag");
   });
+  // a drag that ends over a linked card is not a click on it
+  track.addEventListener(
+    "click",
+    (event) => {
+      if (moved) event.preventDefault();
+      moved = false;
+    },
+    true,
+  );
 };
 
 /** The previous and next buttons beside a track, disabled at either end. */

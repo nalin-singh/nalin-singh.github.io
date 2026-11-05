@@ -1,0 +1,122 @@
+---
+import type { MarkdownHeading } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+import FamCip from "~/components/blueprints/fam-cip.astro";
+import FileOps from "~/components/blueprints/file-ops.astro";
+import KochAgents from "~/components/blueprints/koch-agents.astro";
+import Arrow from "~/components/ui/arrow.astro";
+import { site } from "~/data/site";
+import BaseLayout from "~/layouts/base-layout.astro";
+
+import "~/styles/post.css";
+import "~/styles/work.css";
+import "~/styles/write-card.css";
+
+/** A case study: the blueprint as the hero, then the story of the work, then the next one. */
+interface Props {
+  entry: CollectionEntry<"work">;
+  headings: MarkdownHeading[];
+  next?: CollectionEntry<"work">;
+}
+
+const { entry, headings, next } = Astro.props;
+const { title, description, org, period, role, stack, drawing } = entry.data;
+const drawings = { "koch-agents": KochAgents, "fam-cip": FamCip, "file-ops": FileOps };
+const Drawing = drawings[drawing];
+const parts = headings.filter((heading) => heading.depth === 2);
+---
+
+<BaseLayout title={`${title} · ${site.name}`} description={description} kind="article">
+  <div class="progress" aria-hidden="true">
+    <i id="prog"></i>
+  </div>
+
+  <header class="head pad" id="top">
+    <div class="crumbs mono">
+      <a href="/#work">Selected work</a>
+      <span>/</span>
+      <span>{org}</span>
+    </div>
+    <h1>{title}</h1>
+    <p class="dek">{description}</p>
+    <div class="meta mono">
+      {period && <span>{period}</span>}
+      <span>{role}</span>
+      <span class="pill">Case study</span>
+    </div>
+  </header>
+
+  <div class="case-drawing pad">
+    <Drawing standalone />
+  </div>
+
+  <div class="post pad">
+    <nav class="toc" id="toc" aria-label="Contents">
+      {parts.length > 0 && (
+        <>
+          <span class="mono">Contents</span>
+          {parts.map((part, i) => (
+            <a href={`#${part.slug}`}>
+              <i>{i + 1}</i>
+              {part.text}
+            </a>
+          ))}
+        </>
+      )}
+    </nav>
+    <article class="prose">
+      <slot />
+    </article>
+  </div>
+
+  <div class="end pad">
+    <div class="filed">
+      <span class="mono">Built with</span>
+      <div class="tags">
+        {stack.map((tool) => (
+          <span class="tag mono">{tool}</span>
+        ))}
+      </div>
+      <div class="share">
+        <a class="press y" href="/#work">
+          <span class="back"></span>
+          <span class="face">
+            <Arrow to="w" /> All work
+          </span>
+        </a>
+        <a class="press" href={site.links.linkedin} target="_blank" rel="noopener">
+          <span class="back"></span>
+          <span class="face">
+            Ask me about it on LinkedIn <Arrow />
+          </span>
+        </a>
+      </div>
+      <p class="signoff">Internal tools stay internal, so the drawings stand in for screenshots.</p>
+    </div>
+    {next && (
+      <a class="wcard" href={`/work/${next.id}/`} style={`--c:${next.data.tone}`}>
+        <span class="top mono">
+          <span>Next case study · {next.data.org}</span>
+          <span>{next.data.period ?? "Case study"}</span>
+        </span>
+        <h3>{next.data.title}</h3>
+        <p>{next.data.description}</p>
+        <span class="rd">
+          <span class="back" />
+          <span class="face">
+            Read the case study <Arrow to="e" />
+          </span>
+        </span>
+      </a>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  import { startBlueprints } from "~/scripts/blueprints";
+  import { startReading } from "~/scripts/reading";
+
+  startReading();
+  startBlueprints();
+</script>

@@ -1,0 +1,57 @@
+---
+title: Koch Agents
+description: The asynchronous agent platform behind KochGPT. Teams plug their agents into a gateway, work arrives from chat or Microsoft Teams, and replies come back on an ordered log that survives a dropped connection.
+org: Koch Industries
+period: 2025 – 2026
+role: Proposed it, then built it with a senior architect
+stack: [NATS, Redis Streams, Python, TypeScript, React, AWS Fargate, Datadog, Figma]
+drawing: koch-agents
+tone: "#1d2640"
+order: 1
+---
+
+import Side from "~/components/writes/side.astro";
+
+## The problem
+
+KochGPT is Koch's internal AI assistant. As more teams built agents of their own, each one needed a way in. The platform called every agent's API and waited for the answer, so each new agent meant a new integration, and a slow agent held a connection open the whole time.
+
+Nobody had raised a ticket for this. The same need kept coming up in conversations: put the work somewhere an agent can pick it up, instead of calling each agent and waiting. <Side>the proposal was mine; the build was shared</Side>
+
+I wrote the proposal for a decoupled design, and then planned and built it with a senior architect.
+
+## What I built
+
+- **A NATS gateway.** Agents register, subscribe to topics and take work when it arrives. A message can come from the KochGPT chat or from Microsoft Teams, and the agent answers in the background when it's ready.
+- **Replies that survive.** Each reply is written to an ordered log keyed by its request ID, so an answer outlives a dropped connection or a refreshed tab.
+- **A starter kit.** A reusable Python package that lets a team bootstrap an agent in the framework they prefer, already wired to the gateway.
+- **One event per request.** Wide-event logging across KochGPT's services: one structured line per request with its latency, tokens, internal and external calls and user. Dashboards and alerts in Datadog run off that event, not off free-text logs.
+- **The design system.** I designed the platform's components in Figma and built the matching component library that KochGPT and its teams pull from.
+
+## Decisions
+
+### Requests over NATS, replies over Redis Streams
+
+NATS is good at fanning work out to agents. Replies need something different: an ordered, replayable, short-lived log for each request. Replies first went back over NATS JetStream, which kept every message and used a lot of memory. A Redis Stream keyed by the request ID does exactly that job, and nothing more.
+
+### Make the answer outlive the connection
+
+The first version chained live connections: the browser to KochGPT, and KochGPT to the agent. If any link broke, the answer was lost. Once people started testing it, that happened often: someone reloads, loses Wi-Fi, or closes the laptop while the agent is still working.
+
+Now the browser sends the request and lets go. The agent publishes its reply to Redis in order, under the request ID. The ID sits in the URL, so a refreshed tab asks Redis again and replays the answer from the start.
+
+Two limits are deliberate. Only one service writes to a given chat at a time, and if an agent crashes mid-answer, the user is asked to retry so another instance picks it up.
+
+### Off Lambda when answers got long
+
+Long answers were hitting AWS Lambda's time limit and getting cut off, which is about the worst thing an assistant can do. I ported the streaming services to AWS Fargate in a single day, so answers finish.
+
+## What changed
+
+Teams across Koch ship agents onto KochGPT without building a custom integration, and those agents reach people where they already are, in the chat or in Teams. Answers survive flaky networks and refreshes. Failures and cost are visible in one place, from one event per request.
+
+## In hindsight
+
+- **Design for replay from day one.** We added Redis Streams after people hit dropped connections. Resumability should have been a requirement in the first design.
+- **Test bursts before opening it up.** Sudden bursts of requests clogged the gateway because new instances couldn't start fast enough. I'd load test early and let agents pull work at their own pace, instead of relying on scaling out.
+- **Weigh build against buy sooner.** When AWS Bedrock AgentCore launched, it covered much of what we were running ourselves. I'd evaluate managed options before committing to operate our own broker.

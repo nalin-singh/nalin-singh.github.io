@@ -1,14 +1,16 @@
 ---
+import Arrow from "~/components/ui/arrow.astro";
 import { art } from "~/data/art";
 import type { Chapter } from "~/data/story";
 
 /** A matchbox label: double frame, a two-ink illustration, a title and a footer line. */
 type Props = Chapter;
 
-const { top, art: key, title, text, foot, tone } = Astro.props;
+const { top, art: key, title, text, foot, tone, href, cta } = Astro.props;
+const external = href?.startsWith("http");
 ---
 
-<article class="label" style={tone ? `--c:${tone}` : undefined}>
+<article class:list={["label", { linked: href }]} style={tone ? `--c:${tone}` : undefined}>
   <div class="in">
     <span class="top">{top}</span>
     <div class="art">
@@ -21,6 +23,19 @@ const { top, art: key, title, text, foot, tone } = Astro.props;
     </div>
     <h3>{title}</h3>
     <p>{text}</p>
-    <span class="bot">{foot}</span>
+    <span class="bot">
+      {foot}
+      {href && <Arrow to={external ? "ne" : "e"} />}
+    </span>
   </div>
+  {href && (
+    <a
+      class="cover"
+      href={href}
+      aria-label={cta ?? title}
+      draggable="false"
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener" : undefined}
+    />
+  )}
 </article>

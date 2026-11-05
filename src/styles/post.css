@@ -173,6 +173,16 @@
   font-size: 5.2em;
   line-height: 0.8;
 }
+.prose h3 {
+  margin: 1.7em 0 0.5em;
+  font-family: var(--display);
+  font-weight: 850;
+  font-stretch: 72%;
+  font-size: 23px;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
 .prose strong {
   font-weight: 650;
 }
@@ -572,4 +582,18 @@
 }
 .lost .signoff {
   margin-bottom: 26px;
+}
+
+/* case studies: the blueprint sits full width under the header */
+.case-drawing {
+  display: grid;
+  padding-block: clamp(28px, 4vw, 48px) 0;
+}
+.case-drawing .bp {
+  grid-column: 1 / -1;
+}
+/* the page header already carries the title and the summary */
+.case-drawing .bp > h3,
+.case-drawing .bp > p {
+  display: none;
 }
