@@ -1,5 +1,6 @@
 ---
 import { site } from "~/data/site";
+
 import "~/styles/hero.css";
 
 /** Words on the two tape bands. Repeated four times so the loop never shows a gap. */
@@ -18,31 +19,157 @@ const tape = words
 ---
 
 <header id="top" class="heroes">
-    <div class="h-combo pad">
-      <div class="poster" id="poster3">
-        <h1 class="pl pl-a" aria-label="Nalin Singh"><span class="one" data-fit aria-hidden="true"><span class="fit">Nalin Singh</span></span><span class="two" aria-hidden="true"><span data-fit><span class="fit">Nalin</span></span><span data-fit><span class="fit">Singh</span></span></span></h1>
-        <div class="prule" aria-hidden="true"></div>
-        <p class="sent combo-sent">I build <span class="chip k1" tabindex="0" role="button" aria-expanded="false" data-pop="pc1"><svg viewBox="0 0 40 28" aria-hidden="true"><circle cx="20" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M4 6 L14 11 M4 22 L14 17 M36 6 L26 11 M36 22 L26 17" stroke="currentColor" stroke-width="2.4"/></svg>agent platforms</span> at BlackLine, <span class="chip k2" tabindex="0" role="button" aria-expanded="false" data-pop="pc2"><svg viewBox="0 0 40 28" aria-hidden="true"><path d="M20 3 L29 19 L24 26 H16 L11 19 Z" fill="currentColor"/><path d="M20 3 V18" stroke="#2f2c28" stroke-width="2"/></svg>design</span> the screens people use on top, and usually <span class="chip k3" tabindex="0" role="button" aria-expanded="false" data-pop="pc3"><svg viewBox="0 0 40 28" aria-hidden="true"><path d="M6 8 l8 6 -8 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="18" width="14" height="3" fill="currentColor"/></svg>ship</span> before the ticket exists.</p>
-        <div class="prule thin" aria-hidden="true"></div>
-        <div class="prow mono"><span>Bangalore, IN</span><span aria-hidden="true">✶</span><span>Designer since 2019</span><span aria-hidden="true">✶</span><span>Engineer at BlackLine</span><span aria-hidden="true">✶</span><span>Before that, Koch Industries</span></div>
-      </div>
-      <div class="bands combo-bands" aria-hidden="true">
-        <div class="band b1"><div class="run" data-dir="1"><Fragment set:html={tape} /></div></div>
-        <div class="band b2"><div class="run" data-dir="-1"><Fragment set:html={tape} /></div></div>
-      </div>
-      <div class="pop" id="pc1" hidden><span class="mono">From Selected work</span><b>Koch Agents</b><svg viewBox="0 0 220 90" aria-hidden="true"><rect width="220" height="90" fill="#203828"/><g fill="none" stroke="#e4ecd6" stroke-width="1.3"><rect x="10" y="14" width="44" height="20"/><rect x="10" y="56" width="44" height="20"/><circle cx="110" cy="45" r="16"/><rect x="160" y="8" width="50" height="16"/><rect x="160" y="37" width="50" height="16"/><rect x="160" y="66" width="50" height="16"/><path d="M54 24 L94 40 M54 66 L94 50 M126 40 L160 16 M126 45 H160 M126 50 L160 74"/></g><circle cx="140" cy="31" r="3" fill="#c45a2c"/></svg><span>A gateway for agents, and replies that survive a refresh.</span></div>
-      <div class="pop" id="pc2" hidden><span class="mono">From the design years</span><b>Design archive</b><svg viewBox="0 0 220 90" aria-hidden="true"><rect width="220" height="90" fill="#26304a"/><g transform="rotate(-4 70 45)"><rect x="18" y="14" width="96" height="62" fill="#efe6d2"/><rect x="18" y="14" width="96" height="9" fill="#211c16"/><rect x="26" y="32" width="50" height="8" fill="#211c16"/><rect x="84" y="32" width="24" height="36" fill="#2f5d63"/></g><g transform="rotate(5 160 45)"><rect x="140" y="10" width="44" height="72" rx="6" fill="#efe6d2"/><rect x="140" y="10" width="44" height="30" rx="6" fill="#2f5d63"/></g><rect x="136" y="6" width="52" height="80" fill="none" stroke="#0d99ff" stroke-width="1.2" transform="rotate(5 160 45)"/></svg><span>kpimedia.co, a surf app and a shoe store, all from college.</span></div>
-      <div class="pop" id="pc3" hidden><span class="mono">Right now</span><b>nalin status</b><pre>$ nalin status --now
-work   BlackLine
-build  Prangan
-learn  Go</pre></div>
-      <div class="hfoot">
-        <div class="btns"><a class="press" href="/#work"><span class="back"></span><span class="face">See the work</span></a><a class="press y" href={site.links.linkedin} target="_blank" rel="noopener"><span class="back"></span><span class="face">Say hello ↗</span></a></div>
-        <span class="mono hint"><span class="hint-d">Run your cursor over the name · open the marked words · scroll for the tape</span><span class="hint-m">Tap the marked words · scroll for the tape</span></span>
+  <div class="h-combo pad">
+    <div class="poster" id="poster3">
+      <h1 class="pl pl-a" aria-label="Nalin Singh">
+        <span class="one" data-fit aria-hidden="true">
+          <span class="fit">Nalin Singh</span>
+        </span>
+        <span class="two" aria-hidden="true">
+          <span data-fit>
+            <span class="fit">Nalin</span>
+          </span>
+          <span data-fit>
+            <span class="fit">Singh</span>
+          </span>
+        </span>
+      </h1>
+      <div class="prule" aria-hidden="true"></div>
+      <p class="sent combo-sent">
+        I build{" "}
+        <span class="chip k1" tabindex="0" role="button" aria-expanded="false" data-pop="pc1">
+          <svg viewBox="0 0 40 28" aria-hidden="true">
+            <circle cx="20" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="2.4" />
+            <path
+              d="M4 6 L14 11 M4 22 L14 17 M36 6 L26 11 M36 22 L26 17"
+              stroke="currentColor"
+              stroke-width="2.4"
+            />
+          </svg>
+          agent platforms
+        </span>{" "}
+        at BlackLine,{" "}
+        <span class="chip k2" tabindex="0" role="button" aria-expanded="false" data-pop="pc2">
+          <svg viewBox="0 0 40 28" aria-hidden="true">
+            <path d="M20 3 L29 19 L24 26 H16 L11 19 Z" fill="currentColor" />
+            <path d="M20 3 V18" stroke="#2f2c28" stroke-width="2" />
+          </svg>
+          design
+        </span>{" "}
+        the screens people use on top, and usually{" "}
+        <span class="chip k3" tabindex="0" role="button" aria-expanded="false" data-pop="pc3">
+          <svg viewBox="0 0 40 28" aria-hidden="true">
+            <path
+              d="M6 8 l8 6 -8 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <rect x="18" y="18" width="14" height="3" fill="currentColor" />
+          </svg>
+          ship
+        </span>{" "}
+        before the ticket exists.
+      </p>
+      <div class="prule thin" aria-hidden="true"></div>
+      <div class="prow mono">
+        <span>Bangalore, IN</span>
+        <span aria-hidden="true">✶</span>
+        <span>Designer since 2019</span>
+        <span aria-hidden="true">✶</span>
+        <span>Engineer at BlackLine</span>
+        <span aria-hidden="true">✶</span>
+        <span>Before that, Koch Industries</span>
       </div>
     </div>
-
-  </header>
+    <div class="bands combo-bands" aria-hidden="true">
+      <div class="band b1">
+        <div class="run" data-dir="1">
+          <Fragment set:html={tape} />
+        </div>
+      </div>
+      <div class="band b2">
+        <div class="run" data-dir="-1">
+          <Fragment set:html={tape} />
+        </div>
+      </div>
+    </div>
+    <div class="pop" id="pc1" hidden>
+      <span class="mono">From Selected work</span>
+      <b>Koch Agents</b>
+      <svg viewBox="0 0 220 90" aria-hidden="true">
+        <rect width="220" height="90" fill="#203828" />
+        <g fill="none" stroke="#e4ecd6" stroke-width="1.3">
+          <rect x="10" y="14" width="44" height="20" />
+          <rect x="10" y="56" width="44" height="20" />
+          <circle cx="110" cy="45" r="16" />
+          <rect x="160" y="8" width="50" height="16" />
+          <rect x="160" y="37" width="50" height="16" />
+          <rect x="160" y="66" width="50" height="16" />
+          <path d="M54 24 L94 40 M54 66 L94 50 M126 40 L160 16 M126 45 H160 M126 50 L160 74" />
+        </g>
+        <circle cx="140" cy="31" r="3" fill="#c45a2c" />
+      </svg>
+      <span>A gateway for agents, and replies that survive a refresh.</span>
+    </div>
+    <div class="pop" id="pc2" hidden>
+      <span class="mono">From the design years</span>
+      <b>Design archive</b>
+      <svg viewBox="0 0 220 90" aria-hidden="true">
+        <rect width="220" height="90" fill="#26304a" />
+        <g transform="rotate(-4 70 45)">
+          <rect x="18" y="14" width="96" height="62" fill="#efe6d2" />
+          <rect x="18" y="14" width="96" height="9" fill="#211c16" />
+          <rect x="26" y="32" width="50" height="8" fill="#211c16" />
+          <rect x="84" y="32" width="24" height="36" fill="#2f5d63" />
+        </g>
+        <g transform="rotate(5 160 45)">
+          <rect x="140" y="10" width="44" height="72" rx="6" fill="#efe6d2" />
+          <rect x="140" y="10" width="44" height="30" rx="6" fill="#2f5d63" />
+        </g>
+        <rect
+          x="136"
+          y="6"
+          width="52"
+          height="80"
+          fill="none"
+          stroke="#0d99ff"
+          stroke-width="1.2"
+          transform="rotate(5 160 45)"
+        />
+      </svg>
+      <span>kpimedia.co, a surf app and a shoe store, all from college.</span>
+    </div>
+    <div class="pop" id="pc3" hidden>
+      <span class="mono">Right now</span>
+      <b>nalin status</b>
+      <pre>$ nalin status --now
+work   BlackLine
+build  Prangan
+learn  Go</pre>
+    </div>
+    <div class="hfoot">
+      <div class="btns">
+        <a class="press" href="/#work">
+          <span class="back"></span>
+          <span class="face">See the work</span>
+        </a>
+        <a class="press y" href={site.links.linkedin} target="_blank" rel="noopener">
+          <span class="back"></span>
+          <span class="face">Say hello ↗</span>
+        </a>
+      </div>
+      <span class="mono hint">
+        <span class="hint-d">
+          Run your cursor over the name · open the marked words · scroll for the tape
+        </span>
+        <span class="hint-m">Tap the marked words · scroll for the tape</span>
+      </span>
+    </div>
+  </div>
+</header>
 
 <script>
   import { startFit } from "~/scripts/fit-text";

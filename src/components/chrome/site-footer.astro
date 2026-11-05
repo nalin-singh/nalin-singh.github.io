@@ -1,5 +1,6 @@
 ---
 import { site } from "~/data/site";
+
 import "~/styles/footer.css";
 
 const letters = [...site.name].map((char) => (char === " " ? "\u00a0" : char));
@@ -9,31 +10,101 @@ const year = new Date().getFullYear();
 <footer id="contact" class="ft">
   <div class="ft-grid pad">
     <div class="ft-left">
-      <h2 class="ft-hi inked" aria-label="Say hi."><span class="say">Say</span> <span class="wordw"><span class="roll" aria-hidden="true"><span class="rw2"><span>hi.</span><span>namaste.</span><span>namaskara.</span><span>hola.</span><span>hi.</span></span></span><span class="duo" aria-hidden="true"><svg viewBox="0 0 40 30"><path d="M36 4 C 26 6 14 14 6 26 M6 26 l2 -9 M6 26 l8 -3"/></svg>gracias, Duolingo 🦉</span></span></h2>
-      <p class="ft-line">Happy to talk agent platforms, product engineering, or anything that needs a designer's eye and a backend engineer's patience.</p>
+      <h2 class="ft-hi inked" aria-label="Say hi.">
+        <span class="say">Say</span>{" "}
+        <span class="wordw">
+          <span class="roll" aria-hidden="true">
+            <span class="rw2">
+              <span>hi.</span>
+              <span>namaste.</span>
+              <span>namaskara.</span>
+              <span>hola.</span>
+              <span>hi.</span>
+            </span>
+          </span>
+          <span class="duo" aria-hidden="true">
+            <svg viewBox="0 0 40 30">
+              <path d="M36 4 C 26 6 14 14 6 26 M6 26 l2 -9 M6 26 l8 -3" />
+            </svg>
+            gracias, Duolingo 🦉
+          </span>
+        </span>
+      </h2>
+      <p class="ft-line">
+        Happy to talk agent platforms, product engineering, or anything that needs a designer's eye
+        and a backend engineer's patience.
+      </p>
       <div class="ft-links">
-        <a class="plate2" href={site.links.linkedin} target="_blank" rel="noopener" style="--c:#24402f"><span class="mk" aria-hidden="true">in</span><span class="plt"><span class="mono">LinkedIn</span><b>/in/nalinsinghh</b></span><i aria-hidden="true">↗</i></a>
-        <a class="plate2" href={site.links.github} target="_blank" rel="noopener" style="--c:#1d2640"><span class="mk" aria-hidden="true">{"{ }"}</span><span class="plt"><span class="mono">GitHub</span><b>@nalin-singh</b></span><i aria-hidden="true">↗</i></a>
+        <a
+          class="plate2"
+          href={site.links.linkedin}
+          target="_blank"
+          rel="noopener"
+          style="--c:#24402f"
+        >
+          <span class="mk" aria-hidden="true">
+            in
+          </span>
+          <span class="plt">
+            <span class="mono">LinkedIn</span>
+            <b>/in/nalinsinghh</b>
+          </span>
+          <i aria-hidden="true">↗</i>
+        </a>
+        <a
+          class="plate2"
+          href={site.links.github}
+          target="_blank"
+          rel="noopener"
+          style="--c:#1d2640"
+        >
+          <span class="mk" aria-hidden="true">
+            {"{ }"}
+          </span>
+          <span class="plt">
+            <span class="mono">GitHub</span>
+            <b>@nalin-singh</b>
+          </span>
+          <i aria-hidden="true">↗</i>
+        </a>
       </div>
     </div>
     <nav class="ft-index" aria-label="Footer">
       <span class="mono ft-lab">Index</span>
-      <a href="/#story"><span class="mono">01</span>The story so far</a>
-      <a href="/#work"><span class="mono">02</span>Selected work</a>
-      <a href="/#now"><span class="mono">03</span>How I work</a>
-      <a href="/#writing"><span class="mono">04</span>Reads &amp; writes</a>
-      <a class="totop" href="/#top"><span class="mono">↑</span>Back to the top</a>
+      <a href="/#story">
+        <span class="mono">01</span>The story so far
+      </a>
+      <a href="/#work">
+        <span class="mono">02</span>Selected work
+      </a>
+      <a href="/#now">
+        <span class="mono">03</span>How I work
+      </a>
+      <a href="/#writing">
+        <span class="mono">04</span>Reads &amp; writes
+      </a>
+      <a class="totop" href="/#top">
+        <span class="mono">↑</span>Back to the top
+      </a>
     </nav>
   </div>
   <div class="ft-colo pad mono">
     <span class="regmark" aria-hidden="true"></span>
-    <span>Printed on rough paper in {site.city} · {site.version}, first print</span>
+    <span>
+      Printed on rough paper in {site.city} · {site.version}, first print
+    </span>
     <span class="joke">No React was hydrated in the making of this page.</span>
-    <span>© {year} {site.name}</span>
+    <span>
+      © {year} {site.name}
+    </span>
   </div>
   <div class="ft-plate" id="ftplate" aria-hidden="true" data-fit>
     <span class="fit">
-      {letters.map((char, i) => <span class="lt" style={`--k:${i}`} data-c={char}>{char}</span>)}
+      {letters.map((char, i) => (
+        <span class="lt" style={`--k:${i}`} data-c={char}>
+          {char}
+        </span>
+      ))}
     </span>
   </div>
 </footer>

@@ -12,7 +12,12 @@ const { top, art: key, title, text, foot, tone } = Astro.props;
   <div class="in">
     <span class="top">{top}</span>
     <div class="art">
-      <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" set:html={art[key]} />
+      <svg
+        viewBox="0 0 200 200"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+        set:html={art[key]}
+      />
     </div>
     <h3>{title}</h3>
     <p>{text}</p>

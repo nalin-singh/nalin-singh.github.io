@@ -1,27 +1,46 @@
 ---
 import { nav, site } from "~/data/site";
+
 import "~/styles/bar.css";
 ---
 
 <div class="bar pad mono">
   <a class="logo" id="logo" href="/#top" aria-label={`${site.name}, home`}>
     <span class="lg-stack">
-      <span class="lg-w">Nalin<br />Singh</span>
-      <span class="lg-ver" title="This portfolio, November 2026 release">{site.version}</span>
+      <span class="lg-w">
+        Nalin
+        <br />
+        Singh
+      </span>
+      <span class="lg-ver" title="This portfolio, November 2026 release">
+        {site.version}
+      </span>
     </span>
   </a>
   <nav class="dnav" aria-label="Main">
-    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    {nav.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
   </nav>
-  <span class="clock" id="clock"><b class="clk">--:--</b> in {site.city}</span>
+  <span class="clock" id="clock">
+    <b class="clk">--:--</b> in {site.city}
+  </span>
   <button class="menubtn" type="button" id="menubtn" aria-expanded="false" aria-controls="mnav">
-    <span class="bars" aria-hidden="true"><i></i><i></i></span>Menu
+    <span class="bars" aria-hidden="true">
+      <i></i>
+      <i></i>
+    </span>
+    Menu
   </button>
   <div class="mnav" id="mnav" hidden>
     <nav aria-label="Main">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      {nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
     </nav>
-    <span class="mclock"><b class="clk">--:--</b> in {site.city}</span>
+    <span class="mclock">
+      <b class="clk">--:--</b> in {site.city}
+    </span>
   </div>
 </div>
 

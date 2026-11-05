@@ -1,5 +1,6 @@
 ---
 import { principles } from "~/data/principles";
+
 import "~/styles/how.css";
 
 const rope = "M-10 54 C 160 130 300 40 470 92 S 760 150 900 70 S 1120 40 1210 96";
@@ -7,11 +8,15 @@ const rope = "M-10 54 C 160 130 300 40 470 92 S 760 150 900 70 S 1120 40 1210 96
 
 <section class="how2 pad" id="now" aria-label="How I work">
   <div class="sh">
-    <h2 class="inked">How I<br />work</h2>
+    <h2 class="inked">
+      How I<br />
+      work
+    </h2>
     <span class="mono">From one requirement to a build</span>
   </div>
   <p class="thesis">
-    Agents made code cheap. <span>Understanding, context and judgement</span> are the expensive parts now.
+    Agents made code cheap. <span>Understanding, context and judgement</span> are the expensive
+    parts now.
   </p>
   <div class="rope" id="rope">
     <svg class="ropesvg" viewBox="0 0 1200 380" preserveAspectRatio="none" aria-hidden="true">
@@ -20,16 +25,17 @@ const rope = "M-10 54 C 160 130 300 40 470 92 S 760 150 900 70 S 1120 40 1210 96
       <path class="rp2" d="M1160 330 C 900 400 300 400 60 330"></path>
     </svg>
     <ol class="tags">
-      {
-        principles.map((item, i) => (
-          <li class={`tag ${item.paper}`} style={`--x:${item.x};--y:${item.y};--r:${item.tilt};--i:${i}`}>
-            <span class="hole" />
-            <b class="no">{i}</b>
-            <h4>{item.title}</h4>
-            <p>{item.text}</p>
-          </li>
-        ))
-      }
+      {principles.map((item, i) => (
+        <li
+          class={`tag ${item.paper}`}
+          style={`--x:${item.x};--y:${item.y};--r:${item.tilt};--i:${i}`}
+        >
+          <span class="hole" />
+          <b class="no">{i}</b>
+          <h4>{item.title}</h4>
+          <p>{item.text}</p>
+        </li>
+      ))}
     </ol>
     <span class="loopnote">…and back to 0</span>
   </div>

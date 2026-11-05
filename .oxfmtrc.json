@@ -7,5 +7,6 @@
   "trailingComma": "all",
   "sortImports": true,
   "sortPackageJson": true,
-  "ignorePatterns": ["dist", ".astro", "design", "pnpm-lock.yaml"]
+  "ignorePatterns": ["dist", ".astro", "design", "pnpm-lock.yaml"],
+  "astro": true
 }
