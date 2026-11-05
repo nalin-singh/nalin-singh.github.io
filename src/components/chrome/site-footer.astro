@@ -122,8 +122,13 @@ const year = new Date().getFullYear();
   import { startFit } from "~/scripts/fit-text";
 
   startFit();
+
+  // Touch screens have no hover, so the name fills with ink each time it scrolls into view.
   const name = one("#ftplate");
-  name?.addEventListener("click", () => {
-    if (touch()) name.classList.toggle("on");
-  });
+  if (name && touch()) {
+    new IntersectionObserver(([entry]) => name.classList.toggle("on", !!entry?.isIntersecting), {
+      threshold: 0.6,
+    }).observe(name);
+    name.addEventListener("click", () => name.classList.toggle("on"));
+  }
 </script>
