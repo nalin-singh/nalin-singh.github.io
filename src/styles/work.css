@@ -74,6 +74,18 @@
   overflow-x: auto;
   margin: 14px -6px 6px;
 }
+/* Moving parts live on a twin SVG layered over the drawing, so the filtered lines stay cached. */
+.dwgbox {
+  position: relative;
+}
+.dwgbox > svg.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  will-change: transform;
+}
 .bp svg.dwg {
   display: block;
   width: 100%;

@@ -169,22 +169,31 @@
 .bands {
   margin-inline: 2px;
 }
+/* The band's rough strip is a static backing, so the moving text never re-runs the filter. */
 .band {
   position: absolute;
   height: clamp(40px, 4.6vw, 58px);
   display: flex;
   align-items: center;
-  overflow: hidden;
+  isolation: isolate;
+  clip-path: inset(-8px 0);
+}
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0 3px;
+  z-index: -1;
+  background: var(--bg);
   filter: url("#rough-edge-sm");
 }
 .band.b1 {
-  background: var(--char);
+  --bg: var(--char);
   top: 16%;
   color: var(--paper);
   transform: rotate(-2.2deg);
 }
 .band.b2 {
-  background: var(--bp-2);
+  --bg: var(--bp-2);
   top: 44%;
   color: var(--paper);
   transform: rotate(1.8deg);

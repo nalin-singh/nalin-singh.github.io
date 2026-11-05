@@ -1,4 +1,4 @@
-import { all, calm, loop, onVisible } from "./dom";
+import { all, calm, layer, loop, one, onVisible } from "./dom";
 
 /** Packets that travel along named paths once a drawing is on screen. */
 const flows: Record<string, { period: number; delay?: number; reply?: boolean }> = {
@@ -19,13 +19,16 @@ const flows: Record<string, { period: number; delay?: number; reply?: boolean }>
 };
 
 const packets = (drawing: Element) => {
+  const svg = one<SVGSVGElement>("svg.dwg", drawing);
+  if (!svg) return;
+  const twin = layer(svg);
   for (const path of all<SVGPathElement>("path[id]", drawing)) {
     const flow = flows[path.id];
     if (!flow) continue;
     const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     dot.setAttribute("r", "4");
     dot.setAttribute("class", flow.reply ? "pk r" : "pk");
-    path.parentNode?.appendChild(dot);
+    twin.append(dot);
     const start = performance.now() + (flow.delay ?? 0) + 1300;
     loop((now) => {
       const t = ((now - start) % (flow.period + 500)) / flow.period;
@@ -37,7 +40,7 @@ const packets = (drawing: Element) => {
       dot.setAttribute("cx", String(point.x));
       dot.setAttribute("cy", String(point.y));
       dot.setAttribute("opacity", "1");
-    });
+    }, drawing);
   }
 };
 

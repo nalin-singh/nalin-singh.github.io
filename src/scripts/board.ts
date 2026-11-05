@@ -1,7 +1,10 @@
-import { all, calm, loop, one, onVisible } from "./dom";
+import { all, calm, layer, loop, one, onVisible } from "./dom";
 
 /** The two cursors wander along their paths, like a shared Figma file. */
 const cursors = () => {
+  const canvas = one<SVGSVGElement>("svg.canvas");
+  if (!canvas) return;
+  const twin = layer(canvas);
   const pairs: [string, string, number, number][] = [
     ["cur-a", "cursor-a", 14_000, 0],
     ["cur-b", "cursor-b", 17_000, 0.4],
@@ -10,6 +13,7 @@ const cursors = () => {
     const path = one<SVGPathElement>(`#${pathId}`);
     const cursor = one<SVGGElement>(`#${cursorId}`);
     if (!path || !cursor) continue;
+    twin.append(cursor);
     const length = path.getTotalLength();
     const place = (t: number) => {
       const point = path.getPointAtLength(length * t);
@@ -18,7 +22,7 @@ const cursors = () => {
     place(offset);
     if (calm()) continue;
     const start = performance.now();
-    loop((now) => place(((now - start) / period + offset) % 1));
+    loop((now) => place(((now - start) / period + offset) % 1), twin);
   }
 };
 

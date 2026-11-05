@@ -17,13 +17,16 @@ export const startTape = () => {
     { passive: true },
   );
 
-  loop(() => {
-    speed *= 0.92;
-    position += 0.5 + speed;
-    for (const run of runs) {
-      const width = run.scrollWidth / 4;
-      const offset = position % width;
-      run.style.transform = `translateX(${run.dataset.dir === "1" ? -offset : offset - width}px)`;
-    }
-  });
+  loop(
+    () => {
+      speed *= 0.92;
+      position += 0.5 + speed;
+      for (const run of runs) {
+        const width = run.scrollWidth / 4;
+        const offset = position % width;
+        run.style.transform = `translateX(${run.dataset.dir === "1" ? -offset : offset - width}px)`;
+      }
+    },
+    runs[0]?.closest(".bands") ?? runs[0],
+  );
 };
