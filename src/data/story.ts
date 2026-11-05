@@ -7,6 +7,10 @@ export interface Chapter {
   text: string;
   foot: string;
   tone?: string;
+  /** A case study on this site, or proof elsewhere (opens in a new tab). */
+  href?: string;
+  /** Read by screen readers instead of the card title when the card is a link. */
+  cta?: string;
 }
 
 /** The story so far, oldest first. Years before 2023 are approximate. */
@@ -50,6 +54,8 @@ export const chapters: Chapter[] = [
     text: "A finance workflow from whiteboard to production, mentoring two.",
     foot: "Product",
     tone: "var(--bp)",
+    href: "/work/fam-cip/",
+    cta: "Read the FAM CIP case study",
   },
   {
     top: "2025",
@@ -58,6 +64,8 @@ export const chapters: Chapter[] = [
     text: "A gateway for agents and replies that survive a refresh.",
     foot: "Platform",
     tone: "var(--brown)",
+    href: "/work/koch-agents/",
+    cta: "Read the Koch Agents case study",
   },
   {
     top: "2026",
@@ -77,6 +85,8 @@ export const sides: Chapter[] = [
     title: "OpenCode",
     text: "Merged PRs to an open-source coding agent: language tooling, highlighting and UI fixes.",
     foot: "Open source",
+    href: "https://github.com/anomalyco/opencode/pulls?q=is%3Apr+is%3Amerged+author%3Analin-singh",
+    cta: "See my merged pull requests to OpenCode on GitHub",
   },
   {
     top: "Open source",
@@ -84,6 +94,8 @@ export const sides: Chapter[] = [
     title: "ugit",
     text: "Undo logic for git rm, plus edge cases, in a tool that undoes git mistakes.",
     foot: "Open source",
+    href: "https://github.com/Bhupesh-V/ugit/pulls?q=is%3Apr+is%3Amerged+author%3Analin-singh",
+    cta: "See my merged pull requests to ugit on GitHub",
   },
   {
     top: "2026 · building",
