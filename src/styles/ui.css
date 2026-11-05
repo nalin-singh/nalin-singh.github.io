@@ -1,4 +1,4 @@
-/* Shared pieces: mono labels, inked display type and the pressable button. */
+/* Shared pieces: mono labels, inked display type, the pressable button and the RSS chip. */
 .mono {
   font-family: var(--mono);
   font-size: 11px;
@@ -54,4 +54,21 @@
 }
 .sh .mono {
   color: var(--soft);
+}
+.rss {
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: 5px 11px;
+  text-decoration-line: none;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.rss::before {
+  background: var(--orange);
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
 }

@@ -1,0 +1,31 @@
+---
+import { site } from "~/data/site";
+import BaseLayout from "~/layouts/base-layout.astro";
+
+import "~/styles/post.css";
+---
+
+<BaseLayout title={`Not found · ${site.name}`} description="This page isn't on the drafting table.">
+  <header class="head pad lost">
+    <div class="crumbs mono">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span>404</span>
+    </div>
+    <h1 class="inked">Nothing on this sheet</h1>
+    <p class="dek">
+      The page you're after was moved, renamed or never drawn. The rest is still here.
+    </p>
+    <p class="signoff">probably a typo in the link. happens to me too</p>
+    <div class="share">
+      <a class="press" href="/">
+        <span class="back"></span>
+        <span class="face">Back to the start</span>
+      </a>
+      <a class="press y" href="/writes/">
+        <span class="back"></span>
+        <span class="face">Read something</span>
+      </a>
+    </div>
+  </header>
+</BaseLayout>

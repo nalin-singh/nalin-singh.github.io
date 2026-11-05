@@ -1,0 +1,43 @@
+---
+import WriteCard from "~/components/writes/write-card.astro";
+import { site } from "~/data/site";
+import BaseLayout from "~/layouts/base-layout.astro";
+import { ordered } from "~/lib/writes";
+
+import "~/styles/post.css";
+
+const posts = await ordered();
+---
+
+<BaseLayout
+  title={`Writes · ${site.name}`}
+  description="Notes on agents, backends, process and design, written down while the work is fresh."
+>
+  <header class="head pad">
+    <div class="crumbs mono">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span>Writes</span>
+    </div>
+    <h1 class="inked">Writes</h1>
+    <p class="dek">
+      Notes on agents, backends, process and design, written down while the work is fresh.
+    </p>
+    <div class="meta mono">
+      <a class="rss mono" href="/rss.xml">
+        RSS
+      </a>
+    </div>
+  </header>
+  <section class="pad writes-all" aria-label="All writes">
+    <div class="wcards">
+      {posts.map((post, i) => (
+        <WriteCard
+          post={post}
+          wide={i === 0}
+          label={`Write ${String(i + 1).padStart(2, "0")} · ${post.data.topic}`}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
