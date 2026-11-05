@@ -1,0 +1,30 @@
+---
+import LabelCard from "~/components/ui/label-card.astro";
+import { chapters, sides, years } from "~/data/story";
+import "~/styles/story.css";
+---
+
+<section class="story" id="story" aria-label="My story">
+  <div class="pad sh"><h2 class="inked">The story<br>so far</h2><span class="tctl"><span class="mono">Drag, swipe or use the arrows</span><span class="tnav" data-for="track"><button type="button" class="tprev" aria-label="Earlier">←</button><button type="button" class="tnext" aria-label="Later">→</button></span></span></div>
+  <div class="track" id="track" tabindex="0" aria-label="Chapters, oldest first">
+    {chapters.map((chapter) => <LabelCard {...chapter} />)}
+  </div>
+  <div class="pad">
+    <div class="ruler" aria-hidden="true"><div class="ticks mono" id="ticks">{years.map((year) => <span>{year}</span>)}</div><div class="dot" id="dot"></div></div>
+    <div class="hintrow mono"><span>Seven chapters · one label each</span><span>Years before 2023 are approximate</span></div>
+  </div>
+  <div class="pad side-head">
+    <div class="branch mono" aria-hidden="true"><svg viewBox="0 0 60 40"><path d="M4 8 H56" stroke="currentColor" stroke-width="2"/><path d="M18 8 C30 8 26 32 40 32 H56" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/><circle cx="18" cy="8" r="4" fill="currentColor"/><circle cx="40" cy="32" r="4" fill="var(--paper)" stroke="currentColor" stroke-width="2"/></svg>side/</div>
+    <h3 class="inked">Side projects</h3>
+    <span class="tctl"><span class="mono">Branches off the main line · dates to confirm</span><span class="tnav" data-for="sidetrack"><button type="button" class="tprev" aria-label="Earlier">←</button><button type="button" class="tnext" aria-label="Later">→</button></span></span>
+  </div>
+  <div class="track side" id="sidetrack" tabindex="0" aria-label="Side projects">
+    {sides.map((side) => <LabelCard {...side} />)}
+  </div>
+</section>
+
+<script>
+  import { startTimeline } from "~/scripts/timeline";
+
+  startTimeline();
+</script>

@@ -1,0 +1,21 @@
+---
+import { art } from "~/data/art";
+import type { Chapter } from "~/data/story";
+
+/** A matchbox label: double frame, a two-ink illustration, a title and a footer line. */
+type Props = Chapter;
+
+const { top, art: key, title, text, foot, tone } = Astro.props;
+---
+
+<article class="label" style={tone ? `--c:${tone}` : undefined}>
+  <div class="in">
+    <span class="top">{top}</span>
+    <div class="art">
+      <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" set:html={art[key]} />
+    </div>
+    <h3>{title}</h3>
+    <p>{text}</p>
+    <span class="bot">{foot}</span>
+  </div>
+</article>
