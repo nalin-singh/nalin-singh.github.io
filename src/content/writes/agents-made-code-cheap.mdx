@@ -1,0 +1,93 @@
+---
+title: Agents made code cheap. Understanding is the expensive part now.
+description: What changes when a POC takes an afternoon, and why becoming the subject expert, writing context down and deciding with evidence matter more than typing speed.
+date: 2026-11-05
+topic: Context
+minutes: 8
+icon: branch
+order: 6
+tags: [Process, Agents]
+---
+
+import Side from "~/components/writes/side.astro";
+import Sketch from "~/components/writes/sketch.astro";
+import Tldr from "~/components/writes/tldr.astro";
+
+## The cost moved
+
+A year ago, trying an idea meant a week of plumbing before you learned anything. Now an agent can stand up a working prototype before lunch. The code didn't stop mattering, but it stopped being the slow part.
+
+What got expensive is everything around the code: knowing which problem is worth solving, describing it well enough that a person or an agent can act on it, and having the judgement to throw away the version that doesn't work. <Side>this is the whole post, honestly</Side>
+
+If writing code is cheap, then writing the <mark>wrong</mark> code is also cheap. That sounds like good news until you notice it's now very easy to ship a lot of the wrong thing, very quickly.
+
+## Become the expert first
+
+The best requirement I ever got was the one I wrote myself after sitting with the people doing the work. Before any box gets drawn, I want to be the person in the room who understands the process best, the edge cases, and the reasons behind the weird spreadsheet.
+
+Agents are fluent in code. They aren't fluent in your business. That gap is where engineers now earn their keep. <Side>SME first, engineer second</Side>
+
+<Sketch caption="Fig. 1 · The loop got shorter, so you can afford to go round it more often">
+  <svg
+    viewBox="0 0 640 210"
+    role="img"
+    aria-label="A loop: understand, write context, prototype, decide, then back to understand"
+  >
+    <rect class="ln" x="20" y="70" width="120" height="50" rx="12" />
+    <text x="40" y="100">Understand</text>
+    <rect class="ln" x="180" y="70" width="128" height="50" rx="12" />
+    <text x="194" y="100">Write context</text>
+    <rect class="ln" x="348" y="70" width="112" height="50" rx="12" />
+    <text x="364" y="100">Prototype</text>
+    <rect class="ln" x="500" y="70" width="120" height="50" rx="12" />
+    <text x="532" y="100">Decide</text>
+    <path
+      class="ln"
+      d="M140 95 C152 89 168 101 180 95 M308 95 C322 89 336 101 348 95 M460 95 C474 89 488 101 500 95"
+    />
+    <path class="dash" d="M560 120 C560 182 80 182 80 120" />
+    <text x="250" y="198" class="d">keep what worked, throw away the rest</text>
+    <path class="hot" d="M404 70 V30 M380 30 H430" />
+    <text x="352" y="22" class="y">hours, not weeks</text>
+  </svg>
+</Sketch>
+
+## Write the context down
+
+Context engineering sounds like a new discipline. Mostly it's an old one: writing a very good brief. The goal, the constraints, a couple of examples, what "done" looks like, and the decisions you've already made so nobody relitigates them.
+
+```md title="brief.md"
+## Goal
+Approvals finish in one place, not over email.
+## Constraints
+- SSO only, three roles, finance stays the source of truth
+- No new infra unless something needs real time
+## Done means
+- An approver can clear their queue from their phone
+<!-- decisions so far: notifications are a table, not a queue -->
+```
+
+A brief like this makes a new teammate useful on day one. It makes an agent useful in the first prompt. Same document, two readers. <Side>I keep one per project now</Side>
+
+> Structure is what lets you move fast _without_ breaking things.
+
+## Fail fast, on purpose
+
+When a branch costs nothing, the risky idea should go first. I'd rather learn on Tuesday that an approach doesn't hold than discover it in week three. So I prototype the scary part, keep the boring parts boring, and write down why each decision went the way it did.
+
+- Spike the riskiest assumption in a throwaway branch.
+- Pick the boring option unless the evidence says otherwise.
+- Delete the spike. Keep the notes.
+
+## What I'd tell myself
+
+Typing speed was never the job. Understanding the people, writing the context down and owning what ships were always the job. Agents just made it obvious.
+
+<Tldr>
+
+- Code got cheap. Understanding didn't.
+- Be the expert before you write the brief.
+- Write the brief like a person and an agent will both read it.
+- Fail on purpose, early, and keep the notes.
+
+</Tldr>
