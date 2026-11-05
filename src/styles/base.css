@@ -6,7 +6,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  background: var(--frame);
+  background: var(--frame) var(--frame-grain);
+  background-size: 220px auto;
   color: var(--ink);
   font-family: var(--body);
   font-size: 17px;
@@ -14,17 +15,6 @@ body {
   font-stretch: 96%;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0px;
-  pointer-events: none;
-  background-image: var(--grain-dark);
-  background-size: 220px auto;
-  opacity: 0.38;
-  mix-blend-mode: overlay;
-  z-index: 0;
 }
 a {
   color: inherit;
@@ -47,23 +37,22 @@ a {
   margin-left: auto;
   isolation: isolate;
 }
+/* The sheet is page-sized, so its rough edge and grain are baked images, not live filters or blend modes. */
 .sheet::before {
-  background: var(--paper);
   content: "";
   position: absolute;
-  inset: 0px;
-  filter: url("#rough-edge");
+  inset: -4px;
   z-index: -2;
+  border: 8px solid transparent;
+  border-image: var(--paper-edge) 8 fill / 8px round;
 }
 .sheet::after {
   content: "";
   position: absolute;
   inset: 0px;
-  background-image: var(--grain);
-  background-size: 200px auto;
-  mix-blend-mode: multiply;
-  opacity: 0.4;
   z-index: -1;
+  background-image: var(--grain-ink);
+  background-size: 200px auto;
   pointer-events: none;
 }
 .pad {

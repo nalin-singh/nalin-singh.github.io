@@ -36,7 +36,10 @@
 
   /* textures */
   --grain: url("/textures/grain.png");
+  --grain-ink: url("/textures/grain-ink.png");
   --grain-dark: url("/textures/grain-dark.png");
+  --frame-grain: url("/textures/frame.png");
+  --paper-edge: url("/textures/paper-edge.svg");
 
   color-scheme: light;
 }
