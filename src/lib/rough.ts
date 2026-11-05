@@ -232,50 +232,12 @@ const rule = (double: boolean) => {
   return `url("data:image/svg+xml,${svg.replaceAll("<", "%3C").replaceAll(">", "%3E")}") 0 0/600px ${h}px repeat-x`;
 };
 
-/** Paper-coloured flecks along a box's edge, like a painted plate that has chipped. */
-const flecks = () => {
-  let r = 41;
-  const rand = () => (r = (r * 16807) % 2147483647) / 2147483647;
-  const size = 120;
-  const band = 4;
-  let out = "";
-  const side = (horizontal: boolean, far: boolean) => {
-    let t = rand() * 6;
-    while (t < size) {
-      // a chip is a short, uneven sliver: a few points around a centre line
-      const length = 1 + rand() * 6;
-      const thick = 0.6 + rand() * 1.3;
-      const depth = rand() * (band - thick) * 0.6;
-      const lean = (rand() - 0.5) * thick;
-      const points = [
-        [0, thick * 0.5],
-        [length * 0.3, lean],
-        [length, thick * (0.3 + rand() * 0.4)],
-        [length * 0.6, thick + lean * 0.5],
-      ].map(([u = 0, v = 0]) => {
-        const across = far ? size - depth - v : depth + v;
-        return horizontal
-          ? `${(t + u).toFixed(1)},${across.toFixed(2)}`
-          : `${across.toFixed(2)},${(t + u).toFixed(1)}`;
-      });
-      out += `<polygon points='${points.join(" ")}' opacity='${(0.55 + rand() * 0.45).toFixed(2)}'/>`;
-      t += length + 2 + rand() * 13;
-    }
-  };
-  side(true, false);
-  side(true, true);
-  side(false, false);
-  side(false, true);
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}' fill='%23e4d9c0'>${out}</svg>`;
-  return `url("data:image/svg+xml,${svg.replaceAll("<", "%3C").replaceAll(">", "%3E")}") ${band} / ${band}px / 2px round`;
-};
-
 /** The custom properties behind rough boxes and rules, served once as /rough.css. */
 export const roughCss = () => {
   const vars = [0, 1, 2].flatMap((i) => [
     `--rough-l${i}:${polygon(i * 1.7 + 0.3, 3)}`,
     `--rough-s${i}:${polygon(i * 2.3 + 1.1, 2.2)}`,
   ]);
-  vars.push(`--rule-double:${rule(true)}`, `--rule-single:${rule(false)}`, `--flecks:${flecks()}`);
+  vars.push(`--rule-double:${rule(true)}`, `--rule-single:${rule(false)}`);
   return `:root{${vars.join(";")}}\n`;
 };
