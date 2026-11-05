@@ -1,4 +1,5 @@
 ---
+import Arrow from "~/components/ui/arrow.astro";
 import { site } from "~/data/site";
 
 import "~/styles/hero.css";
@@ -158,7 +159,9 @@ learn  Go</pre>
         </a>
         <a class="press y" href={site.links.linkedin} target="_blank" rel="noopener">
           <span class="back"></span>
-          <span class="face">Say hello ↗</span>
+          <span class="face">
+            Say hello <Arrow />
+          </span>
         </a>
       </div>
       <span class="mono hint">

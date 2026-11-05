@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import Arrow from "~/components/ui/arrow.astro";
 import { icons, tones } from "~/data/icons";
 import { roughen } from "~/lib/rough";
 
@@ -12,9 +13,10 @@ interface Props {
   label: string;
   wide?: boolean;
   cta?: string;
+  arrow?: "ne" | "e";
 }
 
-const { post, label, wide = false, cta = "Read ↗" } = Astro.props;
+const { post, label, wide = false, cta = "Read", arrow = "ne" } = Astro.props;
 const { topic, minutes, draft, icon, title, description } = post.data;
 ---
 
@@ -35,6 +37,8 @@ const { topic, minutes, draft, icon, title, description } = post.data;
   <p>{description}</p>
   <span class="rd">
     <span class="back"></span>
-    <span class="face">{cta}</span>
+    <span class="face">
+      {cta} <Arrow to={arrow} />
+    </span>
   </span>
 </a>

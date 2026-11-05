@@ -1,4 +1,5 @@
 ---
+import Arrow from "~/components/ui/arrow.astro";
 import { site } from "~/data/site";
 
 import "~/styles/footer.css";
@@ -49,7 +50,9 @@ const year = new Date().getFullYear();
             <span class="mono">LinkedIn</span>
             <b>/in/nalinsinghh</b>
           </span>
-          <i aria-hidden="true">↗</i>
+          <i aria-hidden="true">
+            <Arrow />
+          </i>
         </a>
         <a
           class="plate2"
@@ -65,7 +68,9 @@ const year = new Date().getFullYear();
             <span class="mono">GitHub</span>
             <b>@nalin-singh</b>
           </span>
-          <i aria-hidden="true">↗</i>
+          <i aria-hidden="true">
+            <Arrow />
+          </i>
         </a>
       </div>
     </div>
@@ -84,7 +89,10 @@ const year = new Date().getFullYear();
         <span class="mono">04</span>Reads &amp; writes
       </a>
       <a class="totop" href="/#top">
-        <span class="mono">↑</span>Back to the top
+        <span class="mono">
+          <Arrow to="n" />
+        </span>
+        Back to the top
       </a>
     </nav>
   </div>

@@ -1,4 +1,5 @@
 ---
+import Arrow from "~/components/ui/arrow.astro";
 import LabelCard from "~/components/ui/label-card.astro";
 import { chapters, sides, years } from "~/data/story";
 
@@ -16,10 +17,10 @@ import "~/styles/story.css";
       <span class="mono">Drag, swipe or use the arrows</span>
       <span class="tnav" data-for="track">
         <button type="button" class="tprev" aria-label="Earlier">
-          ←
+          <Arrow to="w" />
         </button>
         <button type="button" class="tnext" aria-label="Later">
-          →
+          <Arrow to="e" />
         </button>
       </span>
     </span>
@@ -64,10 +65,10 @@ import "~/styles/story.css";
       <span class="mono">Branches off the main line · dates to confirm</span>
       <span class="tnav" data-for="sidetrack">
         <button type="button" class="tprev" aria-label="Earlier">
-          ←
+          <Arrow to="w" />
         </button>
         <button type="button" class="tnext" aria-label="Later">
-          →
+          <Arrow to="e" />
         </button>
       </span>
     </span>

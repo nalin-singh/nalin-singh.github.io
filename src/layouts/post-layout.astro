@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from "astro";
 import type { CollectionEntry } from "astro:content";
 
+import Arrow from "~/components/ui/arrow.astro";
 import WriteCard from "~/components/writes/write-card.astro";
 import { tones } from "~/data/icons";
 import { site } from "~/data/site";
@@ -79,17 +80,26 @@ const tone = (tag: string) => (tag in tones ? tones[tag as keyof typeof tones] :
       <div class="share">
         <a class="press y" href="#top">
           <span class="back"></span>
-          <span class="face">↑ Back to top</span>
+          <span class="face">
+            <Arrow to="n" /> Back to top
+          </span>
         </a>
         <a class="press" href={site.links.linkedin} target="_blank" rel="noopener">
           <span class="back"></span>
-          <span class="face">Talk about it on LinkedIn ↗</span>
+          <span class="face">
+            Talk about it on LinkedIn <Arrow />
+          </span>
         </a>
       </div>
       <p class="signoff">Thanks for reading. Disagree? Even better, tell me.</p>
     </div>
     {next && (
-      <WriteCard post={next} label={`Next read · ${next.data.topic}`} cta="Keep reading →" />
+      <WriteCard
+        post={next}
+        label={`Next read · ${next.data.topic}`}
+        cta="Keep reading"
+        arrow="e"
+      />
     )}
   </div>
 </BaseLayout>

@@ -1,4 +1,5 @@
 ---
+import Arrow from "~/components/ui/arrow.astro";
 import Rough from "~/components/ui/rough.astro";
 import { sketches } from "~/data/sketches";
 
@@ -58,7 +59,7 @@ import "~/styles/board.css";
       Collage
     </button>
     <button type="button" role="tab" aria-selected="false" data-a="b">
-      Sketch → screen
+      Sketch <Arrow to="e" /> screen
     </button>
   </div>
   <div class="arch-a">
@@ -354,7 +355,9 @@ import "~/styles/board.css";
   </div>
   <a class="press more" href="/#work">
     <span class="back"></span>
-    <span class="face">Open the archive ↗</span>
+    <span class="face">
+      Open the archive <Arrow />
+    </span>
   </a>
 </article>
 
