@@ -74,3 +74,26 @@ export const calm = () => matchMedia("(prefers-reduced-motion: reduce)").matches
 ## Formatting
 
 The formatter doesn't touch `src/content/`, so line breaks and spacing stay exactly as written.
+
+## Case studies
+
+Selected work lives in `src/content/work/`, one MDX file per project, and is published at `/work/<file name>/`. Each one opens with its blueprint drawing.
+
+```yaml
+---
+title: FAM CIP
+description: One or two sentences, shown under the title and on the next-case-study card.
+org: Koch · Molex finance
+period: "2024" # optional; quote it so YAML keeps it as text
+role: Owned it end to end, from discovery to production
+stack: [React, TypeScript, AWS Lambda]
+drawing: fam-cip # koch-agents, fam-cip or file-ops
+tone: "#24402f" # the colour of its next-case-study card
+order: 2
+---
+```
+
+A good shape for the body: the problem, what you built, the decisions and their trade-offs, what changed, and what you'd do differently. Use `###` for each decision. Describe outcomes in words, not numbers.
+
+To link a story or side-project card to a case study or to proof elsewhere, give it an `href` (and a `cta` for screen readers) in `src/data/story.ts`.
+
