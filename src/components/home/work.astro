@@ -1,0 +1,26 @@
+---
+import DesignBoard from "~/components/blueprints/design-board.astro";
+import FamCip from "~/components/blueprints/fam-cip.astro";
+import FileOps from "~/components/blueprints/file-ops.astro";
+import KochAgents from "~/components/blueprints/koch-agents.astro";
+import "~/styles/work.css";
+---
+
+<section class="work pad" id="work" aria-label="Selected work">
+  <div class="sh">
+    <h2 class="inked">Selected<br />work</h2>
+    <span class="mono">Drawn, not screenshotted · internal tools stay internal</span>
+  </div>
+  <div class="bps">
+    <KochAgents />
+    <FamCip />
+    <FileOps />
+    <DesignBoard />
+  </div>
+</section>
+
+<script>
+  import { startBlueprints } from "~/scripts/blueprints";
+
+  startBlueprints();
+</script>

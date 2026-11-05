@@ -1,0 +1,410 @@
+/* Design archive: the navy collage board, chalk markups, live cursors and sketch-to-screen. */
+.board {
+  position: relative;
+  color: rgb(233, 236, 244);
+  isolation: isolate;
+  padding: 20px 20px 18px;
+  grid-column: 1 / -1;
+  min-width: 0px;
+}
+.board::before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -2;
+  filter: url("#rough-edge-sm");
+  background-color: rgb(29, 38, 64);
+  background-image: radial-gradient(circle, rgba(214, 224, 255, 0.2) 1.1px, transparent 1.4px);
+  background-size: 16px 16px;
+}
+.board::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -1;
+  background-image: var(--grain);
+  background-size: 200px auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.board .top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: rgb(170, 180, 204);
+  padding-right: 120px;
+}
+.board h3 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 0.88;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+.board p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  max-width: 56ch;
+  color: rgb(211, 217, 232);
+  font-size: 16.5px;
+}
+.board .dwgwrap {
+  overflow-x: auto;
+  margin: 14px -6px 6px;
+}
+.board svg.canvas {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+}
+.canvas .fname {
+  fill: rgb(183, 192, 214);
+  font-family: Archivo, sans-serif;
+  font-size: 10px;
+}
+.canvas .hex {
+  font-family: "Martian Mono", monospace;
+  font-size: 8.5px;
+}
+.canvas .aa {
+  fill: rgb(33, 28, 22);
+  font-family: Anybody, Impact, sans-serif;
+  font-weight: 900;
+  font-stretch: 70%;
+  font-size: 62px;
+}
+.canvas .note {
+  fill: rgb(33, 28, 22);
+  font-family: "Martian Mono", monospace;
+  font-size: 10.5px;
+}
+.canvas .dimpill,
+.canvas .cname {
+  fill: rgb(255, 255, 255);
+  font-family: Archivo, sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+}
+.canvas .tape {
+  fill: rgb(233, 220, 192);
+  opacity: 0.7;
+}
+.canvas .ab {
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+.board.on .canvas .ab {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.2, 0.9, 0.25, 1.1);
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-play-state: running;
+  animation-name: pin;
+  animation-timeline: auto;
+  animation-range: normal;
+  animation-delay: calc(var(--i) * 110ms);
+}
+.canvas .sel {
+  transition: opacity 0.2s ease-out 0.9s;
+  opacity: 0;
+}
+.board.on .canvas .sel {
+  opacity: 1;
+}
+.canvas .cursor {
+  opacity: 0;
+}
+.board.on .canvas .cursor {
+  opacity: 1;
+  transition: opacity 0.3s ease-out 1s;
+}
+.patch {
+  position: absolute;
+  right: -18px;
+  top: -26px;
+  width: clamp(104px, 11vw, 140px);
+  transform: rotate(12deg);
+  filter: url("#rough-edge-sm") drop-shadow(rgba(0, 0, 0, 0.35) 0px 6px 6px);
+  z-index: 2;
+}
+.patch svg {
+  display: block;
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  border-top: 1.3px solid rgb(143, 155, 184);
+  padding-top: 8px;
+}
+.tabs span {
+  padding: 5px 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  color: rgb(170, 180, 204);
+  font-size: 10px;
+}
+.tabs span.on {
+  border-color: rgb(170, 180, 204);
+  color: rgb(233, 236, 244);
+  background: rgba(0, 0, 0, 0.18);
+}
+.board .more .face {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  padding: 7px 12px;
+}
+.board .more .back {
+  background-color: rgb(16, 22, 42);
+}
+@media (max-width: 900px) {
+  .patch {
+    right: 6px;
+    top: -34px;
+  }
+  .board .top {
+    padding-right: 96px;
+  }
+}
+.atoggle {
+  display: flex;
+  gap: 2px;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.atoggle button {
+  font-stretch: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  background-color: initial;
+  border-width: 1.3px;
+  border-style: solid;
+  border-color: rgb(111, 123, 152);
+  color: rgb(170, 180, 204);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.atoggle button[aria-selected="true"] {
+  background: rgb(233, 236, 244);
+  color: rgb(29, 38, 64);
+  border-color: rgb(233, 236, 244);
+}
+.atoggle button:active {
+  transform: scale(0.97);
+}
+.s2s-pick {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+.s2s-pick button {
+  font-stretch: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  background-color: rgba(0, 0, 0, 0.18);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(111, 123, 152);
+  color: rgb(207, 214, 230);
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.s2s-pick button[aria-pressed="true"] {
+  border-color: rgb(233, 236, 244);
+  color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.08);
+}
+.s2s {
+  position: relative;
+  aspect-ratio: 640 / 380;
+  max-width: 900px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 18px 30px -20px;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  filter: url("#rough-edge-sm");
+}
+.s2s-layer {
+  position: absolute;
+  inset: 0px;
+}
+.s2s-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.s2s-layer.sketch {
+  clip-path: inset(0 calc(100% - var(--x)) 0 0);
+}
+.s2s-handle {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: var(--x);
+  width: 0px;
+}
+.s2s-handle i {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: -1px;
+  width: 2px;
+  background-color: rgb(13, 153, 255);
+}
+.s2s-handle span {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  background-color: rgb(13, 153, 255);
+  color: rgb(255, 255, 255);
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  text-wrap-mode: nowrap;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 10px;
+}
+.s2s-handle:focus-visible span {
+  outline: rgb(255, 255, 255) solid 2px;
+  outline-offset: 2px;
+}
+.s2s-tag {
+  position: absolute;
+  top: 10px;
+  background-color: rgba(29, 38, 64, 0.85);
+  padding: 3px 8px;
+  font-size: 9.5px;
+}
+.s2s-tag.l {
+  left: 10px;
+}
+.s2s-tag.r {
+  right: 10px;
+}
+.s2s .pen {
+  fill: none;
+  stroke: rgb(74, 68, 56);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.s2s .ann {
+  fill: none;
+  stroke: rgb(176, 69, 42);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.s2s .hn {
+  fill: rgb(176, 69, 42);
+  font-family: Archivo, sans-serif;
+  font-style: italic;
+  font-size: 13px;
+}
+.note {
+  background: var(--c, #d8c58c);
+  transition: transform 0.2s ease-out;
+  padding: 14px 14px 16px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 16px -12px;
+}
+.note:hover {
+  transform: rotate(0deg) translateY(-3px);
+}
+.canvas .hand {
+  fill: rgb(33, 28, 22);
+  font-family: Archivo, sans-serif;
+  font-style: italic;
+  font-size: 11px;
+}
+.canvas .hand.light {
+  fill: rgb(238, 230, 210);
+  font-size: 12px;
+}
+.canvas .hex.dark {
+  fill: rgb(59, 52, 43);
+}
+.canvas .tape.t2 {
+  fill: rgb(142, 166, 118);
+  opacity: 0.55;
+}
+.canvas .tape.t3 {
+  fill: rgb(196, 90, 44);
+  opacity: 0.5;
+}
+.chalk .ck {
+  fill: none;
+  stroke: rgb(239, 232, 214);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  opacity: 0.85;
+}
+.board.on .chalk .ck {
+  animation-duration: 0.9s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: draw;
+  animation-timeline: auto;
+  animation-range: normal;
+  animation-delay: var(--d);
+}
+.chalk text {
+  transition: opacity 0.4s ease-out 1.8s;
+  opacity: 0;
+}
+.board.on .chalk text {
+  opacity: 1;
+}
+.board .more {
+  display: inline-block;
+  margin-top: 22px;
+}
+.tabs {
+  margin-top: 10px;
+}
+@keyframes pin {
+  0% {
+    transform: translateY(-14px) rotate(-1.5deg);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes drop {
+  0% {
+    transform: translateY(-40px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(calc(var(--r) * 0.5));
+  }
+}
+.s2s-pane {
+  position: absolute;
+  inset: 0;
+}
+.s2s-pane svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

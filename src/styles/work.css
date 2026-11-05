@@ -1,0 +1,223 @@
+/* Selected work: green blueprint cards with sketched, self-drawing diagrams. */
+.work {
+  border-top: 1.5px solid var(--ink);
+}
+.bps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0px, 1fr));
+  gap: 26px;
+}
+.bp {
+  position: relative;
+  color: var(--bp-line);
+  isolation: isolate;
+  padding: 20px 20px 16px;
+  min-width: 0px;
+}
+.bp.wide {
+  grid-column: 1 / -1;
+}
+.bp::before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -2;
+  filter: url("#rough-edge-sm");
+  background-color: var(--bp);
+  background-image:
+    linear-gradient(rgba(228, 236, 214, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(228, 236, 214, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(228, 236, 214, 0.043) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(228, 236, 214, 0.043) 1px, transparent 1px);
+  background-size:
+    64px 64px,
+    64px 64px,
+    16px 16px,
+    16px 16px;
+}
+.bp::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -1;
+  background-image: var(--grain);
+  background-size: 200px auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.bp .top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: var(--bp-dim);
+}
+.bp h3 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 0.88;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+.bp p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  max-width: 52ch;
+  color: rgb(211, 222, 197);
+  font-size: 16.5px;
+}
+.bp .dwgwrap {
+  overflow-x: auto;
+  margin: 14px -6px 6px;
+}
+.bp svg.dwg {
+  display: block;
+  width: 100%;
+  min-width: 520px;
+}
+.bp.wide svg.dwg {
+  min-width: 640px;
+}
+.dwg .ln {
+  fill: none;
+  stroke: var(--bp-line);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dwg .ln.draw {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+}
+.bp.on .dwg .ln.draw {
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.3, 0.6, 0.2, 1);
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-name: draw;
+  animation-timeline: auto;
+  animation-range: normal;
+  animation-delay: var(--d, 0s);
+}
+.dwg .dash {
+  fill: none;
+  stroke: var(--bp-dim);
+  stroke-width: 1.2;
+  stroke-dasharray: 5, 5;
+}
+.dwg .hot {
+  fill: none;
+  stroke: var(--mustard);
+  stroke-width: 1.6;
+}
+.dwg text {
+  fill: var(--bp-line);
+}
+.dwg text.dim {
+  fill: var(--bp-dim);
+}
+.dwg text.red {
+  fill: var(--mustard);
+}
+.dwg .pk {
+  fill: var(--orange);
+}
+.dwg .pk.r {
+  fill: var(--mustard);
+}
+.bp .more .face {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  padding: 7px 12px;
+}
+.bp .more .back {
+  background-color: rgb(20, 36, 26);
+}
+.bp .dwg .ln,
+.bp .dwg .dash,
+.bp .dwg .hot {
+  filter: url("#wobble");
+}
+.bp .dwg .ln {
+  stroke-width: 1.7;
+}
+.dwg .ln.soft {
+  opacity: 0.45;
+}
+.dwg .slot {
+  fill: none;
+  stroke: var(--bp-line);
+  stroke-width: 1.1;
+}
+.dwg .slot.on {
+  fill: rgba(142, 166, 118, 0.55);
+}
+.dwg .fillhead {
+  fill: rgba(228, 236, 214, 0.18);
+}
+.dwg .fillmerge {
+  fill: rgba(196, 154, 69, 0.28);
+}
+.bp .dwg text {
+  font-family: var(--hand);
+  font-size: 14.5px;
+  letter-spacing: 0.03em;
+}
+.bp .dwg text.dim,
+.bp .dwg text.red {
+  font-size: 12.5px;
+}
+.bp .dwg text.tight {
+  font-size: 9.5px;
+  letter-spacing: 0px;
+}
+.work .sh {
+  align-items: center;
+}
+.bp {
+  display: grid;
+  grid-template-columns: minmax(0px, 1fr) auto;
+  column-gap: 28px;
+  align-items: start;
+}
+.bp > .top {
+  grid-column: 1 / -1;
+}
+.bp > h3,
+.bp > p {
+  grid-column-start: 1;
+}
+.bp > .dwgwrap {
+  grid-column: 1 / -1;
+}
+.bp > .more {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 8px;
+}
+@media (max-width: 760px) {
+  .bp {
+    grid-template-columns: minmax(0px, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .bps {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dwg .ln.draw {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes draw {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
