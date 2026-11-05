@@ -89,7 +89,7 @@ The hand-drawn look is computed once, at build time, by `src/lib/rough.ts`. The 
 
 **HTML boxes.** Use a pre-computed jagged outline as a clip path: `clip-path: var(--rough-s0)` (small, `s0` to `s2`) or `var(--rough-l0)` (large, `l0` to `l2`). Vary the number between neighbours so they don't share an edge.
 
-**Rules and chips.** `var(--rule-double)` and `var(--rule-single)` are dry-brush rules for section dividers. `border-image: var(--flecks)` adds paper-coloured chips around a dark plate.
+**Rules and chips.** `var(--rule-double)` and `var(--rule-single)` are dry-brush rules for section dividers. On the dark footer, a plate shows the torn paper edge around it: `border-image: var(--paper-edge) 8 / 8px / 4px round` on the plate, under its coloured face.
 
 These custom properties come from `/rough.css`, which `src/pages/rough.css.ts` generates at build time.
 
@@ -135,7 +135,7 @@ Add `.y` for the paper face. Green is the main action, paper the secondary one.
 
 ## Layout
 
-- The sheet is at most 1360px wide. `.pad` gives the side gutters, `clamp(16px, 4vw, 60px)`.
+- The sheet is at most 1680px wide, with the same width of charcoal frame on every side. `.pad` gives the side gutters, `clamp(16px, 4vw, 60px)`.
 - The breakpoints are 1100px (post rail collapses), 900px (cards stack) and 600px (phone).
 - Sections are separated by a double rule roughened with `rule-rough`.
 - Nothing scrolls sideways at 390px except the tracks and the drawings, which scroll on purpose.

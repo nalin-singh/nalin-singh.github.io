@@ -27,12 +27,13 @@ a {
   position: relative;
   z-index: 1;
   padding-block: clamp(12px, 2.6vw, 36px);
-  padding-left: max(12px, env(safe-area-inset-left, 0px));
-  padding-right: max(12px, env(safe-area-inset-right, 0px));
+  /* the table shows the same width of frame on the sides as above and below */
+  padding-left: max(clamp(12px, 2.6vw, 36px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(12px, 2.6vw, 36px), env(safe-area-inset-right, 0px));
 }
 .sheet {
   position: relative;
-  max-width: 1360px;
+  max-width: 1680px;
   margin-right: auto;
   margin-left: auto;
   isolation: isolate;
