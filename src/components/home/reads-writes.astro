@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-import { icons, tones } from "~/data/icons";
+import WriteCard from "~/components/writes/write-card.astro";
 import { reads } from "~/data/reads";
 
 import "~/styles/reads-writes.css";
@@ -27,32 +27,11 @@ const posts = (await getCollection("writes"))
   </div>
   <div class="wcards">
     {posts.map((post, i) => (
-      <a
-        class:list={["wcard", { wide: i === 0 }]}
-        href={`/writes/${post.id}/`}
-        style={`--c:${tones[post.data.topic]}`}
-      >
-        <span class="top mono">
-          <span>
-            Write {String(i + 1).padStart(2, "0")} · {post.data.topic}
-          </span>
-          <span>
-            {post.data.minutes} min{post.data.draft ? " · draft" : ""}
-          </span>
-        </span>
-        <svg
-          class="wicon"
-          viewBox="0 0 64 64"
-          aria-hidden="true"
-          set:html={icons[post.data.icon]}
-        />
-        <h3 class="inked">{post.data.title}</h3>
-        <p>{post.data.description}</p>
-        <span class="rd">
-          <span class="back" />
-          <span class="face">Read ↗</span>
-        </span>
-      </a>
+      <WriteCard
+        post={post}
+        wide={i === 0}
+        label={`Write ${String(i + 1).padStart(2, "0")} · ${post.data.topic}`}
+      />
     ))}
   </div>
   <div class="readsrow">

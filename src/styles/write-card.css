@@ -1,0 +1,214 @@
+/* Write cards: a coloured card per write, shared by the home page, the index and the next read. */
+.wcards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0px, 1fr));
+  gap: 24px;
+}
+.wcard {
+  transition: transform 0.2s ease-out;
+  --lift: 0;
+  position: relative;
+  isolation: isolate;
+  filter: drop-shadow(rgba(20, 16, 12, 0) 0px 0px 0px);
+  display: grid;
+  grid-template-columns: minmax(0px, 1fr) auto;
+  align-content: start;
+  gap: 8px 20px;
+  padding: 20px 22px;
+  min-height: 230px;
+  color: var(--paper);
+  text-decoration-line: none;
+}
+.wcard.wide {
+  grid-column: 1 / -1;
+  min-height: 250px;
+}
+.wcard::before {
+  background: var(--c);
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -2;
+  filter: url("#rough-edge");
+}
+.wcard::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -1;
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 28px);
+  background-size:
+    200px auto,
+    auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.wcard:hover,
+.wcard:focus-visible {
+  transform: translate(-3px, -6px) rotate(-0.5deg);
+  filter: drop-shadow(rgba(20, 16, 12, 0.92) 7px 8px 0px);
+}
+.wcard:nth-child(2n):hover,
+.wcard:nth-child(2n):focus-visible {
+  transform: translate(-3px, -6px) rotate(0.5deg);
+}
+.wcard:active {
+  transform: translate(1px, 1px);
+  filter: drop-shadow(rgba(20, 16, 12, 0.92) 2px 2px 0px);
+  transition-duration: 0.08s;
+}
+.wcard h3 {
+  transition: background-size 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0px 100%;
+  background-size: 0px 3px;
+  background-repeat: no-repeat;
+  padding-bottom: 6px;
+}
+.wcard h3 {
+  transition:
+    background-size 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s,
+    color 0.25s ease-out;
+}
+.wcard:hover h3,
+.wcard:focus-visible h3 {
+  background-size: min(46%, 220px) 3px;
+  color: rgb(230, 193, 98);
+}
+.wcard .wicon * {
+  stroke-dasharray: 260;
+}
+.wcard:hover .wicon *,
+.wcard:focus-visible .wicon * {
+  animation: 0.7s cubic-bezier(0.3, 0.6, 0.2, 1) 0s 1 normal none running redraw;
+}
+.wcard .wicon {
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.4, 1);
+}
+.wcard:hover .wicon {
+  transform: rotate(-8deg) scale(1.06);
+}
+.wcard .top span:last-child {
+  transition:
+    transform 0.25s ease-out,
+    color 0.25s ease-out;
+}
+.wcard:hover .top span:last-child {
+  transform: translateX(-4px);
+  color: var(--mustard);
+}
+.wcard:hover .rd {
+  --o: 6px;
+}
+.wcard:hover .rd .face {
+  transform: translate(-1px, -1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wcard,
+  .wcard * {
+    transition: none !important;
+    animation: auto ease 0s 1 normal none running none !important;
+  }
+}
+.wcard .top {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(239, 230, 210, 0.7);
+}
+.wcard .wicon {
+  grid-row: 2 / span 2;
+  grid-column-start: 2;
+  height: 64px;
+  fill: none;
+  stroke: rgba(239, 230, 210, 0.85);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url("#wobble");
+  margin-top: 6px;
+}
+.wcard h3 {
+  grid-column-start: 1;
+  margin-top: 6px;
+  margin-bottom: 0px;
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 0.9;
+  text-wrap-style: balance;
+}
+.wcard.wide h3 {
+  font-size: clamp(36px, 4.2vw, 58px);
+  max-width: 18ch;
+}
+.wcard p {
+  grid-column-start: 1;
+  margin-top: 4px;
+  margin-bottom: 0px;
+  max-width: 52ch;
+  color: rgba(239, 230, 210, 0.88);
+  font-size: 16px;
+}
+.wcard .rd {
+  grid-column-start: 1;
+  justify-self: start;
+  position: relative;
+  margin-top: 14px;
+  --o: 4px;
+}
+.wcard .rd .back {
+  transition: transform 0.14s ease-out;
+  position: absolute;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+  transform: translate(var(--o), var(--o));
+}
+.wcard .rd .face {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  transition: transform 0.14s ease-out;
+  position: relative;
+  display: block;
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-family: var(--display);
+  font-weight: 850;
+  font-stretch: 78%;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.wcard:hover .rd {
+  --o: 5px;
+}
+.wcard:active .rd {
+  --o: 0px;
+}
+.wcard:active .rd .face {
+  transform: translate(4px, 4px);
+}
+@media (max-width: 900px) {
+  .wcards {
+    grid-template-columns: 1fr;
+  }
+  .wcard .wicon {
+    height: 48px;
+  }
+}
+@keyframes redraw {
+  0% {
+    stroke-dashoffset: 260;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

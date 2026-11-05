@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { icons, tones } from "~/data/icons";
+
+import "~/styles/write-card.css";
+
+/** A write as a coloured card: topic and length, a sketched icon, the title, a dek and a Read button. */
+interface Props {
+  post: CollectionEntry<"writes">;
+  label: string;
+  wide?: boolean;
+  cta?: string;
+}
+
+const { post, label, wide = false, cta = "Read ↗" } = Astro.props;
+const { topic, minutes, draft, icon, title, description } = post.data;
+---
+
+<a class:list={["wcard", { wide }]} href={`/writes/${post.id}/`} style={`--c:${tones[topic]}`}>
+  <span class="top mono">
+    <span>{label}</span>
+    <span>
+      {minutes} min{draft ? " · draft" : ""}
+    </span>
+  </span>
+  <svg class="wicon" viewBox="0 0 64 64" aria-hidden="true" set:html={icons[icon]} />
+  <h3 class="inked">{title}</h3>
+  <p>{description}</p>
+  <span class="rd">
+    <span class="back"></span>
+    <span class="face">{cta}</span>
+  </span>
+</a>
