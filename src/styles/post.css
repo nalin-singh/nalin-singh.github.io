@@ -505,6 +505,10 @@
 }
 
 @media (max-width: 1100px) {
+  /* the bar reads as progress beside the contents rail; without the rail it is just a stray line */
+  .progress {
+    display: none;
+  }
   .post {
     grid-template-columns: minmax(0, 1fr);
     max-width: 72ch;
