@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      glob: "*.{astro,ts,js,mjs,json,md,mdx,css,yml,yaml}"
+      run: pnpm oxfmt --check {staged_files}
+    - name: lint
+      glob: "*.{astro,ts,js,mjs}"
+      run: pnpm oxlint {staged_files}
+
+pre-push:
+  jobs:
+    - name: types
+      run: pnpm check
