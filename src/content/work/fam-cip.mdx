@@ -1,0 +1,63 @@
+---
+title: FAM CIP
+description: A finance workflow for Molex's construction-in-progress budgets, taken from the first discovery meeting to production, replacing spreadsheets and email follow-ups.
+org: Koch · Molex finance
+period: "2024"
+role: Owned it end to end, from discovery to production
+stack: [React, TypeScript, shadcn/ui, TanStack Table, Serverless Framework, AWS Lambda, API Gateway, S3, CloudFront, SES, Microsoft Graph, Figma]
+drawing: fam-cip
+tone: "#24402f"
+order: 2
+---
+
+import Side from "~/components/writes/side.astro";
+
+## The problem
+
+FAM CIP stands for Fixed Assets Management, Construction In Progress. A parent entity releases budget under categories. Local teams request funds against a line item, place orders and, when things arrive, record it all in the finance system. Every budget has a window, and when it closes, someone has to explain what was used, what wasn't and why.
+
+All of it ran on Excel forms and email. People forgot to update their items, picked the wrong categories, and spent their days chasing each other for answers.
+
+## Becoming the expert first
+
+My first manager at Koch came back to me for this project. I joined from the first ideation meeting and ran working sessions with the finance team until I could draw the whole process, including the awkward parts. <Side>the best requirement is the one you write after sitting with the people doing the work</Side>
+
+From those sessions I built a clickable, high-fidelity Figma prototype of the end-to-end flow, and iterated on it with the product owner until she signed it off.
+
+## What I built
+
+- **A workflow app with SSO and role-based access** for admins, general users and developers. Users open a request against a line item and add details and comments. Admins approve it, send it back for review, or approve it after review.
+- **Daily ingestion** of the budget line items the parent process creates.
+- **Scheduled jobs for each region** (the US, Europe and APAC) that do two things:
+  - turn approved items into the export format the RPA bot needs, so the bot can post them to the finance system on its own schedule
+  - remind each item's owner before its budget expires, and escalate to their manager chain, looked up through Microsoft Graph, if the reminders go unanswered
+- **In-app notifications** with a badge. Nobody asked for them, but without them, people wouldn't know what needed their attention.
+- **A static frontend** on S3 and CloudFront behind Route 53, deployed from CI/CD with cache invalidation.
+
+## Decisions
+
+### Notifications as a table, not new infrastructure
+
+Someone proposed a Redis-based setup for notifications. The volume was modest and nothing needed to be real time, so a simple events table did the job with no new infrastructure to run. I'd revisit that if real-time updates or much higher volume became a requirement.
+
+### Static hosting for the frontend
+
+The team ran each frontend in its own Kubernetes pod. I moved this one to S3 and CloudFront instead: cached, faster loads, and no servers to keep alive.
+
+### Patterns the team hadn't used yet
+
+Shared shadcn/ui components, TanStack Table and server-side pagination were new to the team. I introduced them for performance and so every screen behaved the same way.
+
+## Bringing two people along
+
+I built this alongside an intern and a senior engineer who was moving from dashboards into backend work. I was the only one who had sat through the discovery, so I walked them through the whole product flow and the architecture before anyone wrote code. Every engineer on a project should know the product end to end.
+
+I wrote the tickets and ran the board. The senior engineer took the backend APIs in TypeScript, which was closest to their experience. The intern took front-end work in smaller pieces, with more feedback along the way. When I moved on, the senior engineer owned the backend and the intern carried on with the front end.
+
+## What changed
+
+The Excel-and-email process is gone. Teams across regions track their budgets in one place, owners hear about expiring items before they become a problem, and approved items flow into the finance system without anyone retyping them. The platform became business-critical, and the project was recognised by senior leadership.
+
+## In hindsight
+
+I'd keep S3, CloudFront and API Gateway. I'd change the backend. The Serverless Framework, as we configured it, meant one Lambda per function, slow deploys and an awkward local setup. I'd run a single container image on Lambda instead: the same image locally and in the cloud, and one function to deploy. I'd also weigh that against ECS Fargate.

@@ -23,7 +23,7 @@ const work = defineCollection({
     title: z.string(),
     description: z.string(),
     org: z.string(),
-    period: z.string(),
+    period: z.string().optional(),
     role: z.string(),
     stack: z.array(z.string()),
     drawing: z.enum(["koch-agents", "fam-cip", "file-ops"]),

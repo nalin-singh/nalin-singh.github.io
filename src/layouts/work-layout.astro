@@ -41,7 +41,7 @@ const parts = headings.filter((heading) => heading.depth === 2);
     <h1>{title}</h1>
     <p class="dek">{description}</p>
     <div class="meta mono">
-      <span>{period}</span>
+      {period && <span>{period}</span>}
       <span>{role}</span>
       <span class="pill">Case study</span>
     </div>
@@ -98,7 +98,7 @@ const parts = headings.filter((heading) => heading.depth === 2);
       <a class="wcard" href={`/work/${next.id}/`} style={`--c:${next.data.tone}`}>
         <span class="top mono">
           <span>Next case study · {next.data.org}</span>
-          <span>{next.data.period}</span>
+          <span>{next.data.period ?? "Case study"}</span>
         </span>
         <h3>{next.data.title}</h3>
         <p>{next.data.description}</p>

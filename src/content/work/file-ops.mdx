@@ -1,0 +1,46 @@
+---
+title: File-Ops
+description: The document pipeline behind KochGPT's uploads and other automations, where OCR and an LLM work together so tables, even merged-cell ones, come through intact.
+org: Koch Industries
+role: Owned the pipeline, its quality and its reliability
+stack: [Python, AWS Textract, AWS Bedrock, AWS Lambda, AWS Fargate, SQS, DynamoDB, Docker, Datadog]
+drawing: file-ops
+tone: "#8e3c22"
+order: 3
+---
+
+import Side from "~/components/writes/side.astro";
+
+## The problem
+
+File-Ops is an internal OCR service. Every document uploaded to KochGPT goes through it, and other teams pay for it to power their own automation workflows, such as pulling structured data out of invoices.
+
+The first version extracted text with a basic Python library. It captured the words but lost the tables: no structure, and nothing at all for complex tables where one cell spans several rows. An LLM can't answer questions about a table it never saw.
+
+## Making the case with evidence
+
+Not everyone wanted to change it. The flow worked well enough, and nobody had measured what good looked like. So instead of arguing, I stored the images the library was actually processing in S3, so the team could see the failures for themselves. <Side>show the failure, don't describe it</Side>
+
+Then I proposed a low-risk proof of concept with an explicit exit: if it doesn't work, we drop it.
+
+The design:
+
+- For PDFs that are only text, read the text layer directly.
+- For everything else, use AWS Textract, which returns every block of text with its position and layout.
+- Feed that structure to the LLM on AWS Bedrock, and reformat the output as Markdown at the end of the pipeline.
+
+The proof of concept captured details that had never come through before. Tables, including merged-cell ones, arrived intact, so the LLM could finally answer questions about them. I also pushed for lighter models where they were good enough. Quality went up and cost went down.
+
+## Fixing failures in layers
+
+A Datadog alert caught a share of uploads failing, counted over a day from both server errors and transformations the service itself recorded as failed. The cause: people uploaded PDFs of any size, and the service processed them page by page, synchronously, on AWS Lambda, until it ran out of time.
+
+I fixed it in layers:
+
+1. **Product limits.** File size and page limits in the UI, matching limits on the API for teams that call it directly, and clearer guidance on what AI can do with a very large PDF.
+2. **Parallel pages.** Pages don't depend on each other, so they're processed in parallel.
+3. **A proper worker.** Long jobs moved from Lambda, which had no retries, to AWS Fargate workers fed by an SQS queue, with retries and a dead-letter queue for jobs that keep failing. Each file's status and retry count live with its metadata in DynamoDB.
+
+## What changed
+
+Tables that used to vanish now come through, so answers about documents are answers about the whole document. The upload failures stopped, and the alert stayed in place as the guardrail.
