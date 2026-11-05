@@ -1,0 +1,57 @@
+/* Shared pieces: mono labels, inked display type and the pressable button. */
+.mono {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.inked {
+  filter: url("#ink");
+}
+.press {
+  --o: 4px;
+  position: relative;
+  text-decoration-line: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.press .back {
+  background: var(--ink);
+  transition: transform 0.14s ease-out;
+  position: absolute;
+  inset: 0px;
+  border-radius: 8px;
+  transform: translate(var(--o), var(--o));
+}
+.press .face {
+  background: var(--bp-2);
+  border: 1.5px solid var(--ink);
+  transition: transform 0.14s ease-out;
+  position: relative;
+  display: block;
+  color: var(--paper);
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-family: var(--display);
+  font-weight: 850;
+  font-stretch: 78%;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.press:hover {
+  --o: 5px;
+}
+.press:active {
+  --o: 0px;
+}
+.press:active .face {
+  transform: translate(4px, 4px) scale(0.98);
+}
+.press.y .face {
+  background: var(--paper);
+  color: var(--ink);
+}
+.sh .mono {
+  color: var(--soft);
+}

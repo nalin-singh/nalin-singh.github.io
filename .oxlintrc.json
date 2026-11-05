@@ -7,9 +7,25 @@
     "perf": "warn"
   },
   "rules": {
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "unicorn/filename-case": ["error", { "case": "kebabCase" }],
-    "import/no-default-export": "off"
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "import/no-default-export": "off",
+    "import/no-unassigned-import": [
+      "warn",
+      {
+        "allow": ["**/*.css"]
+      }
+    ]
   },
   "ignorePatterns": ["dist", ".astro", "design", "node_modules"]
 }

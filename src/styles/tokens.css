@@ -1,0 +1,42 @@
+/*
+ * Design tokens for the Drafting Table system.
+ * Every colour, font and texture in the site comes from here.
+ * See docs/design-system.md for how each one is used.
+ */
+:root {
+  /* paper and ink */
+  --frame: #1f1d1a;
+  --frame-2: #2a2723;
+  --paper: #e4d9c0;
+  --paper-2: #d8ccb0;
+  --ink: #211c16;
+  --soft: #625747;
+  --rule: #c4b697;
+
+  /* blueprint greens */
+  --bp: #203828;
+  --bp-2: #2c4a36;
+  --bp-line: #e4ecd6;
+  --bp-dim: #a9c09a;
+
+  /* label inks, used sparingly */
+  --orange: #c45a2c;
+  --mustard: #c49a45;
+  --brown: #5f4029;
+  --sage: #8ea676;
+  --rust: #8e3c22;
+  --char: #2f2c28;
+  --tan: #b9a57d;
+
+  /* type */
+  --display: "Anybody", "Arial Narrow", Impact, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Martian Mono", ui-monospace, Menlo, monospace;
+  --hand: "Patrick Hand", "Comic Sans MS", cursive;
+
+  /* textures */
+  --grain: url("/textures/grain.png");
+  --grain-dark: url("/textures/grain-dark.png");
+
+  color-scheme: light;
+}
