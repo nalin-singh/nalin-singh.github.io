@@ -231,7 +231,8 @@ footer h2 span {
   gap: 0.22em;
   letter-spacing: 0.02em;
   font-stretch: 60%;
-  font-size: clamp(64px, 8.4vw, 132px);
+  /* "Say namaskara." is about 6.4 times the font size wide, so size by the column it sits in */
+  font-size: min(132px, 15cqi);
   text-align: left;
 }
 .ft .ft-hi > span.say {
@@ -239,6 +240,9 @@ footer h2 span {
 }
 .wordw {
   position: relative;
+}
+.ft-left {
+  container-type: inline-size;
 }
 .ft .ft-hi .roll {
   height: 0.84em;
@@ -336,6 +340,9 @@ footer h2 span {
   transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.4, 1);
   font-style: normal;
   font-size: 24px;
+}
+.plate2 i .arw {
+  stroke-width: 1.1;
 }
 .plate2:hover,
 .plate2:focus-visible {
