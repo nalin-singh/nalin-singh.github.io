@@ -81,3 +81,11 @@
   stroke-linejoin: round;
   overflow: visible;
 }
+/* Text scaled by fit-text.ts to fill its box. It must never wrap, or the measurement is wrong. */
+[data-fit] {
+  min-width: 0;
+}
+.fit {
+  display: inline-block;
+  white-space: nowrap;
+}
