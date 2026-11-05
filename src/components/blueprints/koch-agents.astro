@@ -1,64 +1,70 @@
+---
+import Rough from "~/components/ui/rough.astro";
+---
+
 <article class="bp wide" data-bp>
   <div class="top mono">
     <span>Drawing NS-01 · Platform</span>
     <span>Koch Industries</span>
   </div>
-  <h3 class="inked">Koch Agents</h3>
+  <h3>Koch Agents</h3>
   <p>
     The async platform behind KochGPT. Teams plug their agents into a gateway, work arrives from
     chat or Microsoft Teams, and replies stream back on an ordered log, so an answer survives a
     dropped connection or a refresh.
   </p>
   <div class="dwgwrap">
-    <svg
-      class="dwg"
-      viewBox="0 0 760 284"
-      aria-label="Diagram: KochGPT chat and Microsoft Teams send requests to a NATS gateway, which fans out to agents. Replies go back through a Redis Stream keyed by request ID."
-    >
-      <rect rx="12" class="ln draw" x="20" y="48" width="120" height="46" style="--d:0s" />
-      <text x="38" y="76">
-        KOCHGPT CHAT
-      </text>
-      <rect rx="12" class="ln draw" x="20" y="156" width="120" height="46" style="--d:.1s" />
-      <text x="34" y="184">
-        MS TEAMS
-      </text>
-      <path id="ka-a" class="ln draw" d="M140 71 C212 71 244 94 285 118" style="--d:.4s" />
-      <path id="ka-b" class="ln draw" d="M140 179 C212 179 244 160 285 140" style="--d:.45s" />
-      <circle class="ln draw" cx="330" cy="129" r="46" style="--d:.25s" />
-      <text x="330" y="126" text-anchor="middle">
-        NATS
-      </text>
-      <text x="330" y="141" text-anchor="middle">
-        GATEWAY
-      </text>
-      <path id="ka-1" class="ln draw" d="M376 120 C418 72 468 50 540 50" style="--d:.7s" />
-      <path id="ka-2" class="ln draw" d="M376 129 C430 122 488 136 540 129" style="--d:.75s" />
-      <path id="ka-3" class="ln draw" d="M376 138 C418 188 468 208 540 208" style="--d:.8s" />
-      <rect rx="12" class="ln draw" x="540" y="30" width="150" height="40" style="--d:.9s" />
-      <text x="556" y="55">
-        AGENT · HR
-      </text>
-      <rect rx="12" class="ln draw" x="540" y="109" width="150" height="40" style="--d:.95s" />
-      <text x="556" y="134">
-        AGENT · FINANCE
-      </text>
-      <rect rx="12" class="ln draw" x="540" y="188" width="150" height="40" style="--d:1s" />
-      <text x="556" y="213">
-        AGENT · DOCS
-      </text>
-      <path id="ka-r" class="dash" d="M690 228 C692 262 600 258 400 257 C200 256 78 262 80 202" />
-      <text x="385" y="278" class="red" text-anchor="middle">
-        REDIS STREAM · ORDERED · REPLAYABLE BY REQUEST ID
-      </text>
-      <path class="hot" d="M330 70 C326 50 334 40 330 26 M300 27 C320 23 340 29 360 25" />
-      <text x="296" y="20" class="dim">
-        TOPIC FAN-OUT
-      </text>
-      <text x="690" y="244" class="dim" text-anchor="end">
-        REV B · REPLIES MOVED OFF JETSTREAM
-      </text>
-    </svg>
+    <Rough look="wobble" only={["ln", "dash", "hot"]}>
+      <svg
+        class="dwg"
+        viewBox="0 0 760 284"
+        aria-label="Diagram: KochGPT chat and Microsoft Teams send requests to a NATS gateway, which fans out to agents. Replies go back through a Redis Stream keyed by request ID."
+      >
+        <rect rx="12" class="ln draw" x="20" y="48" width="120" height="46" style="--d:0s" />
+        <text x="38" y="76">
+          KOCHGPT CHAT
+        </text>
+        <rect rx="12" class="ln draw" x="20" y="156" width="120" height="46" style="--d:.1s" />
+        <text x="34" y="184">
+          MS TEAMS
+        </text>
+        <path id="ka-a" class="ln draw" d="M140 71 C212 71 244 94 285 118" style="--d:.4s" />
+        <path id="ka-b" class="ln draw" d="M140 179 C212 179 244 160 285 140" style="--d:.45s" />
+        <circle class="ln draw" cx="330" cy="129" r="46" style="--d:.25s" />
+        <text x="330" y="126" text-anchor="middle">
+          NATS
+        </text>
+        <text x="330" y="141" text-anchor="middle">
+          GATEWAY
+        </text>
+        <path id="ka-1" class="ln draw" d="M376 120 C418 72 468 50 540 50" style="--d:.7s" />
+        <path id="ka-2" class="ln draw" d="M376 129 C430 122 488 136 540 129" style="--d:.75s" />
+        <path id="ka-3" class="ln draw" d="M376 138 C418 188 468 208 540 208" style="--d:.8s" />
+        <rect rx="12" class="ln draw" x="540" y="30" width="150" height="40" style="--d:.9s" />
+        <text x="556" y="55">
+          AGENT · HR
+        </text>
+        <rect rx="12" class="ln draw" x="540" y="109" width="150" height="40" style="--d:.95s" />
+        <text x="556" y="134">
+          AGENT · FINANCE
+        </text>
+        <rect rx="12" class="ln draw" x="540" y="188" width="150" height="40" style="--d:1s" />
+        <text x="556" y="213">
+          AGENT · DOCS
+        </text>
+        <path id="ka-r" class="dash" d="M690 228 C692 262 600 258 400 257 C200 256 78 262 80 202" />
+        <text x="385" y="278" class="red" text-anchor="middle">
+          REDIS STREAM · ORDERED · REPLAYABLE BY REQUEST ID
+        </text>
+        <path class="hot" d="M330 70 C326 50 334 40 330 26 M300 27 C320 23 340 29 360 25" />
+        <text x="296" y="20" class="dim">
+          TOPIC FAN-OUT
+        </text>
+        <text x="690" y="244" class="dim" text-anchor="end">
+          REV B · REPLIES MOVED OFF JETSTREAM
+        </text>
+      </svg>
+    </Rough>
   </div>
   <a class="press more" href="/#work">
     <span class="back"></span>

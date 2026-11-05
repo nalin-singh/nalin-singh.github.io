@@ -33,7 +33,6 @@
 .rp {
   fill: none;
   stroke-linecap: round;
-  filter: url("#wobble");
 }
 .rp2 {
   fill: none;
@@ -283,10 +282,9 @@
   position: absolute;
   inset: 0px;
   pointer-events: none;
-  mix-blend-mode: multiply;
   opacity: 0.55;
   background-image:
-    var(--grain),
+    var(--grain-multiply),
     repeating-linear-gradient(97deg, rgba(60, 35, 10, 0.07) 0 1px, transparent 1px 6px),
     repeating-linear-gradient(8deg, rgba(255, 240, 210, 0.06) 0 1px, transparent 1px 9px);
   background-size:
@@ -331,12 +329,6 @@
   color: var(--tn);
   font-size: 50px;
   top: 20px;
-  mix-blend-mode: multiply;
-  filter: url("#ink");
-}
-.tag.green .no,
-.tag.navy .no {
-  mix-blend-mode: normal;
 }
 .tag p {
   opacity: 0.9;
@@ -358,7 +350,6 @@
     background-position: 0px 0px;
     background-size: 34px 360px;
     background-repeat: repeat-y;
-    filter: url("#rule-rough");
   }
   .tags {
     gap: 22px;
@@ -436,7 +427,6 @@
     background-position: 0px 0px;
     background-size: 34px 360px;
     background-repeat: repeat-y;
-    filter: url("#rule-rough");
   }
   .tags .tag {
     transform: rotate(calc(var(--r) * 0.7));

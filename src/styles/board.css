@@ -12,7 +12,7 @@
   position: absolute;
   inset: 0px;
   z-index: -2;
-  filter: url("#rough-edge-sm");
+  clip-path: var(--rough-s0);
   background-color: rgb(29, 38, 64);
   background-image: radial-gradient(circle, rgba(214, 224, 255, 0.2) 1.1px, transparent 1.4px);
   background-size: 16px 16px;
@@ -22,9 +22,8 @@
   position: absolute;
   inset: 0px;
   z-index: -1;
-  background-image: var(--grain);
+  background-image: var(--grain-soft);
   background-size: 200px auto;
-  mix-blend-mode: soft-light;
   opacity: 0.7;
   pointer-events: none;
 }
@@ -130,7 +129,7 @@
   top: -26px;
   width: clamp(104px, 11vw, 140px);
   transform: rotate(12deg);
-  filter: url("#rough-edge-sm") drop-shadow(rgba(0, 0, 0, 0.35) 0px 6px 6px);
+  filter: drop-shadow(rgba(0, 0, 0, 0.35) 0px 6px 6px);
   z-index: 2;
 }
 .patch svg {
@@ -239,7 +238,7 @@
   cursor: ew-resize;
   touch-action: pan-y;
   user-select: none;
-  filter: url("#rough-edge-sm");
+  clip-path: var(--rough-s1);
 }
 .s2s-layer {
   position: absolute;

@@ -22,7 +22,7 @@
   position: absolute;
   inset: 0px;
   z-index: -2;
-  filter: url("#rough-edge-sm");
+  clip-path: var(--rough-s1);
   background-color: var(--bp);
   background-image:
     linear-gradient(rgba(228, 236, 214, 0.1) 1px, transparent 1px),
@@ -40,9 +40,8 @@
   position: absolute;
   inset: 0px;
   z-index: -1;
-  background-image: var(--grain);
+  background-image: var(--grain-soft);
   background-size: 200px auto;
-  mix-blend-mode: soft-light;
   opacity: 0.7;
   pointer-events: none;
 }
@@ -150,11 +149,6 @@
 }
 .bp .more .back {
   background-color: rgb(20, 36, 26);
-}
-.bp .dwg .ln,
-.bp .dwg .dash,
-.bp .dwg .hot {
-  filter: url("#wobble");
 }
 .bp .dwg .ln {
   stroke-width: 1.7;

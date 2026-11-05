@@ -252,7 +252,7 @@
     56px 56px,
     14px 14px,
     14px 14px;
-  filter: url("#rough-edge-sm");
+  clip-path: var(--rough-s2);
 }
 .fig svg {
   display: block;
@@ -264,7 +264,6 @@
   stroke: var(--bp-line);
   stroke-width: 1.6;
   stroke-linecap: round;
-  filter: url("#wobble");
 }
 .fig .dash {
   fill: none;
@@ -276,7 +275,6 @@
   fill: none;
   stroke: var(--mustard);
   stroke-width: 1.8;
-  filter: url("#wobble");
 }
 .fig text {
   fill: var(--bp-line);
@@ -309,7 +307,7 @@
   inset: 0;
   z-index: -1;
   background: #1d1a16;
-  filter: url("#rough-edge-sm");
+  clip-path: var(--rough-s0);
 }
 .code .tb {
   display: flex;
@@ -383,9 +381,8 @@
   position: absolute;
   inset: 0;
   border-radius: 3px;
-  background-image: var(--grain);
+  background-image: var(--grain-multiply);
   background-size: 180px auto;
-  mix-blend-mode: multiply;
   opacity: 0.32;
   pointer-events: none;
 }
@@ -431,7 +428,6 @@
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: url("#wobble");
 }
 .prose .tldr ul {
   grid-column: 1;

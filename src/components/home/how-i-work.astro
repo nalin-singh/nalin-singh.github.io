@@ -1,4 +1,5 @@
 ---
+import Rough from "~/components/ui/rough.astro";
 import { principles } from "~/data/principles";
 
 import "~/styles/how.css";
@@ -8,7 +9,7 @@ const rope = "M-10 54 C 160 130 300 40 470 92 S 760 150 900 70 S 1120 40 1210 96
 
 <section class="how2 pad" id="now" aria-label="How I work">
   <div class="sh">
-    <h2 class="inked">
+    <h2>
       How I<br />
       work
     </h2>
@@ -19,11 +20,13 @@ const rope = "M-10 54 C 160 130 300 40 470 92 S 760 150 900 70 S 1120 40 1210 96
     parts now.
   </p>
   <div class="rope" id="rope">
-    <svg class="ropesvg" viewBox="0 0 1200 380" preserveAspectRatio="none" aria-hidden="true">
-      <path class="rp" d={rope}></path>
-      <path class="rp tw" d={rope}></path>
-      <path class="rp2" d="M1160 330 C 900 400 300 400 60 330"></path>
-    </svg>
+    <Rough look="wobble" only={["rp"]}>
+      <svg class="ropesvg" viewBox="0 0 1200 380" preserveAspectRatio="none" aria-hidden="true">
+        <path class="rp" d={rope}></path>
+        <path class="rp tw" d={rope}></path>
+        <path class="rp2" d="M1160 330 C 900 400 300 400 60 330"></path>
+      </svg>
+    </Rough>
     <ol class="tags">
       {principles.map((item, i) => (
         <li

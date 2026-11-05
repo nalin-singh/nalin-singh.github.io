@@ -35,7 +35,7 @@ const tone = (tag: string) => (tag in tones ? tones[tag as keyof typeof tones] :
       <span>/</span>
       <span>{topic}</span>
     </div>
-    <h1 class="inked">{title}</h1>
+    <h1>{title}</h1>
     <p class="dek">{description}</p>
     <div class="meta mono">
       <time datetime={date.toISOString()}>{day}</time>

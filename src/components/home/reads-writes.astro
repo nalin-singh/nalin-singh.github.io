@@ -1,4 +1,5 @@
 ---
+import Rough from "~/components/ui/rough.astro";
 import WriteCard from "~/components/writes/write-card.astro";
 import { reads } from "~/data/reads";
 import { ordered } from "~/lib/writes";
@@ -11,7 +12,7 @@ const posts = (await ordered()).filter((post) => post.data.order <= 5);
 
 <section class="rw pad" id="writing" aria-label="Reads and writes">
   <div class="subh">
-    <h2 class="inked">Writes</h2>
+    <h2>Writes</h2>
     <span class="hnote">
       things I wrote down{" "}
       <svg viewBox="0 0 40 24" aria-hidden="true">
@@ -34,7 +35,7 @@ const posts = (await ordered()).filter((post) => post.data.order <= 5);
   <div class="readsrow">
     <div class="reads">
       <div class="subh">
-        <h2 class="inked">Reads</h2>
+        <h2>Reads</h2>
         <span class="hnote">
           books on my desk{" "}
           <svg viewBox="0 0 40 24" aria-hidden="true">
@@ -58,19 +59,26 @@ const posts = (await ordered()).filter((post) => post.data.order <= 5);
             </button>
           ))}
           <span class="bookend" aria-hidden="true">
-            <svg viewBox="0 0 90 200">
-              <path d="M4 200 V22 C 50 22 86 92 86 200 Z" fill="#6b4a2d" />
-              <path d="M4 22 C 50 22 86 92 86 200" fill="none" stroke="#8a6440" stroke-width="3" />
-              <path
-                d="M14 196 C 20 140 14 90 22 34 M30 196 C 36 140 32 100 40 44 M50 196 C 54 150 50 110 58 70 M68 196 C 70 160 68 130 74 110"
-                fill="none"
-                stroke="#5a3d24"
-                stroke-width="1.4"
-                opacity=".7"
-              />
-              <rect x="4" y="22" width="5" height="178" fill="#4a321e" />
-              <rect x="0" y="194" width="90" height="6" fill="#4a321e" />
-            </svg>
+            <Rough look="edge-sm">
+              <svg viewBox="0 0 90 200">
+                <path d="M4 200 V22 C 50 22 86 92 86 200 Z" fill="#6b4a2d" />
+                <path
+                  d="M4 22 C 50 22 86 92 86 200"
+                  fill="none"
+                  stroke="#8a6440"
+                  stroke-width="3"
+                />
+                <path
+                  d="M14 196 C 20 140 14 90 22 34 M30 196 C 36 140 32 100 40 44 M50 196 C 54 150 50 110 58 70 M68 196 C 70 160 68 130 74 110"
+                  fill="none"
+                  stroke="#5a3d24"
+                  stroke-width="1.4"
+                  opacity=".7"
+                />
+                <rect x="4" y="22" width="5" height="178" fill="#4a321e" />
+                <rect x="0" y="194" width="90" height="6" fill="#4a321e" />
+              </svg>
+            </Rough>
           </span>
           <span class="pullhint" aria-hidden="true">
             <svg viewBox="0 0 60 40">

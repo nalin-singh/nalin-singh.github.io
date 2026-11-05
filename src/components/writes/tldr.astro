@@ -1,4 +1,5 @@
 ---
+import Rough from "~/components/ui/rough.astro";
 /** The short version, as a matchbox label. Put a markdown list inside. */
 ---
 
@@ -9,9 +10,11 @@
       <span>N. Singh · desk copy</span>
     </span>
     <b>TL;DR</b>
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M32 8 C 20 8 14 17 14 26 C 14 34 20 38 23 44 H41 C44 38 50 34 50 26 C 50 17 44 8 32 8 Z M24 50 H40 M26 56 H38 M32 44 V30 M27 30 H37"></path>
-    </svg>
+    <Rough look="wobble">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 8 C 20 8 14 17 14 26 C 14 34 20 38 23 44 H41 C44 38 50 34 50 26 C 50 17 44 8 32 8 Z M24 50 H40 M26 56 H38 M32 44 V30 M27 30 H37"></path>
+      </svg>
+    </Rough>
     <slot />
     <span class="bot">
       <span>Read in a minute</span>

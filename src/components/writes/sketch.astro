@@ -1,4 +1,5 @@
 ---
+import Rough from "~/components/ui/rough.astro";
 /** A blueprint figure: a sketched SVG on the green grid, with a mono caption. */
 interface Props {
   caption: string;
@@ -8,6 +9,8 @@ const { caption } = Astro.props;
 ---
 
 <figure class="fig">
-  <slot />
+  <Rough look="wobble" only={["ln", "dash", "hot"]}>
+    <slot />
+  </Rough>
   <figcaption class="mono">{caption}</figcaption>
 </figure>
